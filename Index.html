@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head title="Oven Simulator">
+    <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+    <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    
+    <script src="OvenViewModel.js"></script>
+    <script src="StatusProperties.js"></script>
+    <script src="OvenProgram.js"></script>
+    <script src="OvenProgramStep.js"></script>
+    <script>
+        $(document).ready(function() {
+            var viewModel = new OvenViewModel();
+            ko.applyBindings(viewModel);
+        });
+    </script>
+    <link type="text/css" href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="controlPanel">
+        <div>
+            <div class="displayBox" data-bind="text: TopDisplay"></div>
+        </div>
+        <div>
+            <div>
+                <button class="btn" data-bind="click: ButtonClickSteam, css: LightOnSteam() ? 'btnSteamOn' : 'btnSteamOff'"></button>
+
+                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickProgram">P</button>
+                <span data-bind="css: LightOnProgram() ? 'on' : 'off'">*</span>
+                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickTemp">Te</button>
+                <span data-bind="css: LightOnTemp() ? 'on' : 'off'">*</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <button class="btn btn-default btn-sm" data-bind="click: IncreaseTargetTemperature">+</button>
+                <button class="btn btn-default btn-sm" data-bind="click: DecreaseTargetTemperature">-</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="displayBox" data-bind="text: BottomDisplay"></div>
+        </div>
+        <div>
+            <div>
+                <button class="btn" data-bind="event: { mousedown: PowerButtonDown, mouseup: PowerButtonUp }, css: LightOnLightOnOff() ? 'btnLightOnOffOn' : 'btnLightOnOffOff'"></button>
+
+                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickFanLo">Fan Lo</button>
+                <span data-bind="css: LightOnFanLo() ? 'on' : 'off'">*</span>
+                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickTimerStartStop">Ti/Sta/Sto</button>
+                <span data-bind="css: LightOnTimerStartStop() ? 'on' : 'off'">*</span>
+            </div>
+        </div>
+    </div>
+    <div>
+
+        <h1 data-bind="text: DisplayTemperature">Temperature</h1>
+        <!--<button class="btn btn-success" data-bind="visible: !IsOn(), click: On">Turn On</button>
+    <button class="btn btn-default" data-bind="visible: IsOn(), click: Off">Turn Off</button>-->
+
+        <span data-bind="text: '(x' + TimeDilation() + ')'"></span>
+        <button class="btn btn-link" data-bind="click: IncreaseTimeDilation">faster</button>
+        <button class="btn btn-link" data-bind="click: DecreaseTimeDilation">slower</button>
+
+        <label class="control-label">Set Temperature</label>
+        <input data-bind="value: TemperatureTarget" type="number" class="form-control" style="width: 200px" />
+    </div>
+</body>
+</html>
