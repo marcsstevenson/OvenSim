@@ -22,48 +22,55 @@
 .controlPanel {
   height: 1000px;
   width: 300px;
-  background-image: url('/Images/D-series-control-panel.png');
+  background-image: url('Images/D-series-control-panel.png');
 }
 .btn {
-  width: 53px;
-  height: 53px;
+  width: 46px;
+  height: 46px;
   cursor: pointer;
+  border: none;
 }
-/*.btnLightOff {
-    background-image: url('/Images/btnLightOff.png');
+/*.btnLight__Off {
+    background-image: url('Images/btnLight_Off.png');
 }
 
-.btnLightOn {
-    background-image: url('/Images/btnLightOn.png');
+.btnLight__On {
+    background-image: url('Images/btnLight_On.png');
 }*/
-.btnLightOnOffOff {
-  background-image: url('/Images/btnLightOnOffOff.png');
+.btnSteam_Off {
+  background-image: url('Images/btnSteam_Off.png');
 }
-.btnLightOnOffOn {
-  background-image: url('/Images/btnLightOnOffOn.png');
+.btnSteam_On {
+  background-image: url('Images/btnSteam_On.png');
 }
-.btnProgramOff {
-  background-image: url('/Images/btnProgramOff.png');
+.btnProgram_Off {
+  background-image: url('Images/btnProgram_Off.png');
 }
-.btnProgramOn {
-  background-image: url('/Images/btnProgramOn.png');
+.btnProgram_On {
+  background-image: url('Images/btnProgram_On.png');
 }
-.btnStartStopOff {
-  background-image: url('/Images/btnStartStopOff.png');
+.btnTemp_Off {
+  background-image: url('Images/btnTemp_Off.png');
 }
-.btnStartStopOn {
-  background-image: url('/Images/btnStartStopOn.png');
+.btnTemp_On {
+  background-image: url('Images/btnTemp_On.png');
 }
-.btnSteamOff {
-  background-image: url('/Images/btnSteamOff.png');
+.btnLightPower_Off {
+  background-image: url('Images/btnLightPower_Off.png');
 }
-.btnSteamOn {
-  background-image: url('/Images/btnSteamOn.png');
+.btnLightPower_On {
+  background-image: url('Images/btnLightPower_On.png');
 }
-.btnTempOff {
-  background-image: url('/Images/btnTempOff.png');
+.btnFan_Off {
+  background-image: url('Images/btnFan_Off.png');
 }
-.btnTempOn {
-  background-image: url('/Images/btnTempOn.png');
+.btnFan_On {
+  background-image: url('Images/btnFan_On.png');
+}
+.btnTimer_Off {
+  background-image: url('Images/btnTimer_Off.png');
+}
+.btnTimer_On {
+  background-image: url('Images/btnTimer_On.png');
 }
 /*# sourceMappingURL=Style.css.map */

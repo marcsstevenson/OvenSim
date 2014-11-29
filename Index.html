@@ -25,12 +25,9 @@
         </div>
         <div>
             <div>
-                <button class="btn" data-bind="click: ButtonClickSteam, css: LightOnSteam() ? 'btnSteamOn' : 'btnSteamOff'"></button>
-
-                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickProgram">P</button>
-                <span data-bind="css: LightOnProgram() ? 'on' : 'off'">*</span>
-                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickTemp">Te</button>
-                <span data-bind="css: LightOnTemp() ? 'on' : 'off'">*</span>
+                <button class="btn" data-bind="click: ButtonClickSteam, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
+                <button class="btn" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
+                <button class="btn" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
             </div>
         </div>
         <div>
@@ -45,12 +42,9 @@
         </div>
         <div>
             <div>
-                <button class="btn" data-bind="event: { mousedown: PowerButtonDown, mouseup: PowerButtonUp }, css: LightOnLightOnOff() ? 'btnLightOnOffOn' : 'btnLightOnOffOff'"></button>
-
-                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickFanLo">Fan Lo</button>
-                <span data-bind="css: LightOnFanLo() ? 'on' : 'off'">*</span>
-                <button class="btn btn-default btn-sm" data-bind="click: ButtonClickTimerStartStop">Ti/Sta/Sto</button>
-                <span data-bind="css: LightOnTimerStartStop() ? 'on' : 'off'">*</span>
+                <button class="btn" data-bind="event: { mousedown: LightPowerButtonDown, mouseup: LightPowerButtonUp }, css: LightOn_LightPower() ? 'btnLightPower_On' : 'btnLightPower_Off'"></button>
+                <button class="btn" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
+                <button class="btn" data-bind="click: ButtonClickTimer, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
             </div>
         </div>
     </div>

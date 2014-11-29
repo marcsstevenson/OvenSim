@@ -86,6 +86,9 @@ function OvenViewModel() {
         self.TemperatureTarget(newValue);
     };
 
+
+    //Time Dilation - Start
+
     self.IncreaseTimeDilation = function () {
         self.SetTimeDilation(self.TimeDilation() + 1);
     };
@@ -95,7 +98,7 @@ function OvenViewModel() {
     };
 
     self.SetTimeDilation = function (newValue) {
-        console.log(newValue);
+        self.Log(newValue);
         if (newValue >= self.MaxTimeDilation) //Ensure that we do not go above our max target
         {
             self.TimeDilation(self.MaxTimeDilation);
@@ -107,9 +110,11 @@ function OvenViewModel() {
             return;
         }
 
-        console.log(newValue);
+        self.Log(newValue);
         self.TimeDilation(newValue);
     };
+
+    //Time Dilation - End
 
     self.DisplayTemperature = ko.computed(function () {
         //Round the value
@@ -138,7 +143,11 @@ function OvenViewModel() {
 
     self.Stop = function () {
     }
-    
+
+    self.Log = function(message) {
+
+    };
+
     //Operational flags
 
     self.IsFanLow = ko.observable(false);
@@ -151,24 +160,31 @@ function OvenViewModel() {
             return "";
         }
     });
+
     self.ButtonClickSteam = function () {
 
     };
-    self.LightOnSteam = ko.computed(function () {
+
+    self.LightOn_Steam = ko.computed(function () {
         return false;
     });
+
     self.ButtonClickProgram = function () {
 
     };
-    self.LightOnProgram = ko.computed(function () {
+
+    self.LightOn_Program = ko.computed(function () {
         return false;
     });
+
     self.ButtonClickTemp = function () {
 
     };
-    self.LightOnTemp = ko.computed(function () {
+
+    self.LightOn_Temp = ko.computed(function () {
         return false;
     });
+    
     self.BottomDisplay = ko.computed(function () {
         if (self.OvenIsOn()) {
             return self.Temperature();
@@ -176,22 +192,20 @@ function OvenViewModel() {
             return "";
         }
     });
-    //self.ButtonClickLightOnOff = function () {
 
-    //};
-    self.LightOnLightOnOff = ko.computed(function () {
+    self.LightOn_LightPower = ko.computed(function () {
         return self.LightIsOn();
     });
-    self.ButtonClickFanLo = function () {
+    self.ButtonClickFan = function () {
         self.IsFanLow(!self.IsFanLow());
     };
-    self.LightOnFanLo = ko.computed(function () {
+    self.LightOn_Fan = ko.computed(function () {
         return self.IsFanLow();
     });
-    self.ButtonClickTimerStartStop = function () {
+    self.ButtonClickTimer = function () {
 
     };
-    self.LightOnTimerStartStop = ko.computed(function () {
+    self.LightOn_Timer = ko.computed(function () {
         return false;
     });
     
@@ -223,7 +237,7 @@ function OvenViewModel() {
     //key to switch oven light ‘On-Off’.
     //Press and hold ‘On-Off/Light’ key for 1.5 seconds
     //to turn the oven ‘Off’.
-    self.PowerButtonDown = function() {
+    self.LightPowerButtonDown = function() {
         if (self.OvenIsOn()) {
             //Either the button is held for 1500ms and the oven is turned off or we toggle the light
             self.IsWaitingForPowerOffInterval = true;
@@ -236,7 +250,7 @@ function OvenViewModel() {
         }
     };
 
-    self.PowerButtonUp = function () {
+    self.LightPowerButtonUp = function () {
         //If the oven is off - we don't care because we just 
         if (self.IsWaitingForPowerOffInterval) {
             self.ToggleLight();
