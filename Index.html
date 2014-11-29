@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head title="Oven Simulator">
-    <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
-    <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <head title="Oven Simulator">
+        <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+        <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+        <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
     
-    <script src="OvenViewModel.js"></script>
-    <script src="StatusProperties.js"></script>
-    <script src="OvenProgram.js"></script>
-    <script src="OvenProgramStep.js"></script>
-    <script>
-        $(document).ready(function() {
-            var viewModel = new OvenViewModel();
-            ko.applyBindings(viewModel);
-        });
-    </script>
-    <link type="text/css" href="style.css" rel="stylesheet">
-</head>
+        <script src="OvenViewModel.js"></script>
+        <script src="StatusProperties.js"></script>
+        <script src="OvenProgram.js"></script>
+        <script src="OvenProgramStep.js"></script>
+        <script>
+            $(document).ready(function() {
+                var viewModel = new OvenViewModel();
+                ko.applyBindings(viewModel);
+            });
+        </script>
+        <link type="text/css" href="style.css" rel="stylesheet">
+    </head>
+
 <body>
     <div class="controlPanel">
         <div>
