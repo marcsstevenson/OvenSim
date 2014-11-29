@@ -21,32 +21,29 @@
 
 <body>
     <div class="controlPanel">
-        <div>
-            <div class="displayBox" data-bind="text: TopDisplay"></div>
+        <div class="TopPadding">
+
         </div>
-        <div>
-            <div>
-                <button class="btn" data-bind="click: ButtonClickSteam, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
-                <button class="btn" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
-                <button class="btn" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
-            </div>
+        <div class="displayBox DisplayLeftMargin" data-bind="text: TopDisplay"></div>
+        
+        <div class="ButtonsLeftMargin ButtonsTopMargin">
+            <button class="btn" data-bind="click: ButtonClickSteam, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
         </div>
-        <div>
-            <div>
-                <button class="btn btn-default btn-sm" data-bind="click: IncreaseTargetTemperature">+</button>
-                <button class="btn btn-default btn-sm" data-bind="click: DecreaseTargetTemperature">-</button>
-            </div>
+        <div class="TempTopPadding TempLeftMargin">
+
+            <button class="btn btn-default btn-sm" data-bind="click: IncreaseTargetTemperature">+</button>
+            <button class="btn btn-default btn-sm" data-bind="click: DecreaseTargetTemperature">-</button>
         </div>
 
-        <div>
-            <div class="displayBox" data-bind="text: BottomDisplay"></div>
+        <div class="BottomDisplayTopMargin">
+            <div class="displayBox DisplayLeftMargin" data-bind="text: BottomDisplay"></div>
         </div>
-        <div>
-            <div>
-                <button class="btn" data-bind="event: { mousedown: LightPowerButtonDown, mouseup: LightPowerButtonUp }, css: LightOn_LightPower() ? 'btnLightPower_On' : 'btnLightPower_Off'"></button>
-                <button class="btn" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
-                <button class="btn" data-bind="click: ButtonClickTimer, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
-            </div>
+        <div class="ButtonsLeftMargin ButtonsTopMargin">
+            <button class="btn" data-bind="event: { mousedown: LightPowerButtonDown, mouseup: LightPowerButtonUp }, css: LightOn_LightPower() ? 'btnLightPower_On' : 'btnLightPower_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTimer, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
         </div>
     </div>
     <div>
