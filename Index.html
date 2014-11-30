@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head title="Oven Simulator">
-        <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
-        <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-        <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
-    
-        <script src="OvenViewModel.js"></script>
-        <script src="StatusProperties.js"></script>
-        <script src="OvenProgram.js"></script>
-        <script src="OvenProgramStep.js"></script>
-        <script>
-            $(document).ready(function() {
-                var viewModel = new OvenViewModel();
-                ko.applyBindings(viewModel);
-            });
-        </script>
-        <link type="text/css" href="style.css" rel="stylesheet">
-    </head>
+<head>
+    <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
+    <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+
+    <script src="OvenViewModel.js"></script>
+    <script src="StatusProperties.js"></script>
+    <script src="UserInterface.js"></script>
+    <script src="OvenProgram.js"></script>
+    <script src="Timers.js"></script>
+    <script src="Subscriptions.js"></script>
+    <script src="OvenProgramStep.js"></script>
+    <script src="OvenTemperatureManager.js"></script>
+    <script>
+        $(document).ready(function () {
+            var viewModel = new OvenViewModel();
+            ko.applyBindings(viewModel);
+        });
+    </script>
+    <title>Moffat Oven Simulator</title>
+    <link type="text/css" href="style.css" rel="stylesheet">
+</head>
 
 <body>
     <div class="controlPanel">
@@ -25,16 +30,15 @@
 
         </div>
         <div class="displayBox DisplayLeftMargin" data-bind="text: TopDisplay"></div>
-        
+
         <div class="ButtonsLeftMargin ButtonsTopMargin">
             <button class="btn" data-bind="click: ButtonClickSteam, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
         </div>
-        <div class="TempTopPadding TempLeftMargin">
-
-            <button class="btn btn-default btn-sm" data-bind="click: IncreaseTargetTemperature">+</button>
-            <button class="btn btn-default btn-sm" data-bind="click: DecreaseTargetTemperature">-</button>
+        <div class="TempTopPadding SplitLeftMargin">
+            <div class="btnTemp_Down" data-bind="click: btnTemp_DownClick"></div>
+            <div class="btnTemp_Up" data-bind="click: btnTemp_UpClick"></div>
         </div>
 
         <div class="BottomDisplayTopMargin">
@@ -45,19 +49,22 @@
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTimer, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
         </div>
+        <div class="TimerTopPadding SplitLeftMargin">
+            <div class="btnTimer_Down" data-bind="click: btnTimer_DownClick"></div>
+            <div class="btnTimer_Up" data-bind="click: btnTimer_UpClick"></div>
+        </div>
     </div>
     <div>
-
-        <h1 data-bind="text: DisplayTemperature">Temperature</h1>
+        <h1 data-bind="text: ActualTemperature">Temperature</h1>
         <!--<button class="btn btn-success" data-bind="visible: !IsOn(), click: On">Turn On</button>
-    <button class="btn btn-default" data-bind="visible: IsOn(), click: Off">Turn Off</button>-->
+        <button class="btn btn-default" data-bind="visible: IsOn(), click: Off">Turn Off</button>-->
 
         <span data-bind="text: '(x' + TimeDilation() + ')'"></span>
-        <button class="btn btn-link" data-bind="click: IncreaseTimeDilation">faster</button>
-        <button class="btn btn-link" data-bind="click: DecreaseTimeDilation">slower</button>
+        <button class="btn" data-bind="click: IncreaseTimeDilation">faster</button>
+        <button class="btn" data-bind="click: DecreaseTimeDilation">slower</button>
 
-        <label class="control-label">Set Temperature</label>
-        <input data-bind="value: TemperatureTarget" type="number" class="form-control" style="width: 200px" />
+        <label>Set Temperature</label>
+        <input data-bind="value: TargetTemperature" type="number" style="width: 200px" />
     </div>
 </body>
 </html>

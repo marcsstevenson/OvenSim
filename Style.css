@@ -73,6 +73,50 @@
 .btnTimer_On {
   background-image: url('Images/btnTimer_On.png');
 }
+.btnSplit {
+  width: 81px;
+  height: 63px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: inline-block;
+}
+.btnTemp_Down {
+  width: 81px;
+  height: 63px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  background-image: url('Images/btnTemp_Down.png');
+}
+.btnTemp_Up {
+  width: 81px;
+  height: 63px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  background-image: url('Images/btnTemp_Up.png');
+}
+.btnTimer_Down {
+  width: 81px;
+  height: 63px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  background-image: url('Images/btnTimer_Down.png');
+}
+.btnTimer_Up {
+  width: 81px;
+  height: 63px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  background-image: url('Images/btnTimer_Up.png');
+}
 /*Layout*/
 .TopPadding {
   padding-top: 143px;
@@ -90,12 +134,15 @@
   padding-top: 18px;
 }
 .TempTopPadding {
-  padding-top: 143px;
+  padding-top: 6px;
 }
-.TempLeftMargin {
-  margin-left: 69px;
+.SplitLeftMargin {
+  margin-left: 65px;
 }
 .BottomDisplayTopMargin {
-  margin-top: 92px;
+  margin-top: 208px;
+}
+.TimerTopPadding {
+  padding-top: 3px;
 }
 /*# sourceMappingURL=Style.css.map */
