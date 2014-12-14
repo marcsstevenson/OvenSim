@@ -9,4 +9,16 @@ function Subscriptions(self) {
     self.LightIsOn.subscribe(function () {
         console.log("LightIsOn: " + self.LightIsOn());
     });
+
+    self.MoistureModeOn.subscribe(function () {
+        console.log("MoistureModeOn: " + self.MoistureModeOn());
+    });
+
+    self.CurrentMoistureMode.subscribe(function () {
+        console.log("CurrentMoistureMode: " + self.CurrentMoistureMode());
+    });
+
+    self.DisplayingMoistureSetup.subscribe(function () {
+        console.log("DisplayingMoistureSetup: " + self.DisplayingMoistureSetup());
+    });
 }

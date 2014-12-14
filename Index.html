@@ -2,9 +2,11 @@
 <html>
 <head>
     <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
-    <script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
     <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <script src="Lib/knockout-3.1.0.js"></script>
+    <script src="Lib/jquery-2.1.1.min.js"></script>
 
     <script src="OvenViewModel.js"></script>
     <script src="StatusProperties.js"></script>
@@ -32,7 +34,7 @@
         <div class="displayBox DisplayLeftMargin" data-bind="text: TopDisplay"></div>
 
         <div class="ButtonsLeftMargin ButtonsTopMargin">
-            <button class="btn" data-bind="click: ButtonClickSteam, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
+            <button class="btn" data-bind="event: { mousedown: SteamButtonDown, mouseup: SteamButtonUp }, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
         </div>
