@@ -3,22 +3,35 @@
 function Subscriptions(self) {
     //Status Subscriptions
     self.OvenIsOn.subscribe(function () {
-        console.log("OvenIsOn: " + self.OvenIsOn());
+        self.Log("OvenIsOn: " + self.OvenIsOn());
     });
 
     self.LightIsOn.subscribe(function () {
-        console.log("LightIsOn: " + self.LightIsOn());
+        self.Log("LightIsOn: " + self.LightIsOn());
     });
 
     self.MoistureModeOn.subscribe(function () {
-        console.log("MoistureModeOn: " + self.MoistureModeOn());
+        self.Log("MoistureModeOn: " + self.MoistureModeOn());
     });
 
     self.CurrentMoistureMode.subscribe(function () {
-        console.log("CurrentMoistureMode: " + self.CurrentMoistureMode());
+        self.Log("CurrentMoistureMode: " + self.CurrentMoistureMode());
     });
 
     self.DisplayingMoistureSetup.subscribe(function () {
-        console.log("DisplayingMoistureSetup: " + self.DisplayingMoistureSetup());
+        self.Log("DisplayingMoistureSetup: " + self.DisplayingMoistureSetup());
     });
+    
+    self.IsManualMode.subscribe(function () {
+        self.Log("IsManualMode: " + self.IsManualMode());
+    });
+
+    self.IsCooking.subscribe(function () {
+        self.Log("IsCooking: " + self.IsCooking());
+    });
+
+    self.SteamShooting.subscribe(function () {
+        self.Log("SteamShooting: " + self.SteamShooting());
+    });
+
 }

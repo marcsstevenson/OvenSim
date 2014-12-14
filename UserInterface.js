@@ -4,7 +4,7 @@ function UserInterface(self) {
 
     self.LightOn_Steam = ko.computed(function () {
         if (self.OvenIsOn()) {
-            return self.MoistureModeOn() || self.DisplayingMoistureSetup();
+            return self.MoistureModeOn() || self.DisplayingMoistureSetup() || self.SteamShooting();
         } else
             return false;
     });
@@ -43,7 +43,7 @@ function UserInterface(self) {
     self.ButtonClickProgram = function () {
 
     };
-    
+
     self.ButtonClickTemp = function () {
         self.ToggleTempDisplay();
     };
@@ -60,7 +60,7 @@ function UserInterface(self) {
     self.btnTemp_DownClick = function () {
         self.Temp_DownClickFunction()();
     };
-    
+
     self.Temp_UpClickFunction = ko.observable();
     self.btnTemp_UpClick = function () {
         self.Temp_UpClickFunction()();
@@ -113,7 +113,7 @@ function UserInterface(self) {
         self.ClearPowerTimer(); //Stop the timer
         self.IsWaitingForPowerOffInterval = false; //Always reset this
     };
-    
+
     //Press and hold the ‘Steam’ Key until the ‘H-X’ level is
     //displayed and flashing in the upper display.
     //Rotate the ‘Temp’ Knob -/+ to select Moisture Mode
@@ -139,7 +139,20 @@ function UserInterface(self) {
     self.SteamButtonUp = function () {
         //If the oven is off - we don't care because we just 
         if (self.IsWaitingForMoistureModeOffInterval) {
-            self.ToggleMoistureMode();
+            //‘Steam’ LED will
+            //illuminate when
+            //automated
+            //Moisture Mode is
+            //set (H-1-H-5) or
+            //during each
+            //moisture
+            //injection in H-0.
+
+            //If moisture mode is H-0
+            if (self.CurrentMoistureMode() === 0)
+                if (self.IsCooking()) self.SteamShot();
+                else
+                    self.ToggleMoistureMode();
         }
 
         self.ClearMoistureModeTimer(); //Stop the timer
@@ -150,12 +163,12 @@ function UserInterface(self) {
         //Round the value
         return Math.round(self.ActualTemperature());
     });
-    
+
     self.MoistureModeDisplay = ko.computed(function () {
         return self.BlinkOn() === true ? 'H-' + self.CurrentMoistureMode() : '';
     });
 
     self.Log = function (message) {
-        console.log(message);
+        self.Log(message);
     };
 }

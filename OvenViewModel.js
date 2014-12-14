@@ -101,7 +101,12 @@ function OvenViewModel() {
     };
     
     self.SteamShot = function () {
-        self.log('Steam Shot');
+        self.SteamShooting(true);
+        self.StartSteamShotModeIntervalTimer();
+    };
+
+    self.Log = function(entry) {
+        console.log(entry);
     };
 
     //Set defaults
@@ -109,6 +114,8 @@ function OvenViewModel() {
 
     //Temp - testing
     self.TurnOvenOn();
-    self.StartDisplayingMoistureModeSetup();
+    
+    console.clear();
+
     return self;
 };

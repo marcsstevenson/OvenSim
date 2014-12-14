@@ -13,10 +13,12 @@
   width: 163px;
   height: 65px;
   border: 0;
-  font-size: 48pt;
+  font-size: 55pt;
   font-family: 'ds-digitalitalic';
   text-align: center;
   background-color: #414142;
+  /*background-color: yellow;*/
+  vertical-align: top;
   color: red;
 }
 .controlPanel {

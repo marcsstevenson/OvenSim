@@ -3,7 +3,7 @@
 function StatusProperties(self) {
     self.StartTemperature = 18;
     self.MaxTargetTemperature = 240;
-    self.DefaultTargetTemperature = 180;
+    self.DefaultTargetTemperature = 150;
     self.MinTargetTemperature = 80;
     self.MaxTimeDilation = 1;
     self.MinTimeDilation = 1;
@@ -24,6 +24,9 @@ function StatusProperties(self) {
     self.DisplayingMoistureSetup = ko.observable();
     self.BlinkOn = ko.observable(false);
     self.FanSpeed = ko.observable(); //1 is high, 0 is low
+    self.IsManualMode = ko.observable();
+    self.IsCooking = ko.observable();
+    self.SteamShooting = ko.observable();
     self.ElementOn = ko.observable(false);
     
     //Persistent status values (these remain after power on/off and are therefore not reset by default)
@@ -50,6 +53,9 @@ function StatusProperties(self) {
         self.Timer_UpClickFunction(self.DecreaseTargetTimererature);
         self.TopDisplayFunction(self.TargetTemperature);
         self.BottomDisplayFunction(null); //TODO
+        self.IsManualMode(true);
+        self.IsCooking(true);
+        self.SteamShooting(false);
 
         //Clear all timers
         self.ClearPowerTimer();
