@@ -114,49 +114,12 @@ function UserInterface(self) {
         self.IsWaitingForPowerOffInterval = false; //Always reset this
     };
 
-    //Press and hold the ‘Steam’ Key until the ‘H-X’ level is
-    //displayed and flashing in the upper display.
-    //Rotate the ‘Temp’ Knob -/+ to select Moisture Mode
-    //level required.
-    //Press the STEAM Key to confirm setting.
     self.SteamButtonDown = function () {
-        if (self.OvenIsOn()) {
-            if (self.DisplayingMoistureSetup()) {
-                //Stop DisplayingMoistureSetup
-                self.StopDisplayingMoistureMode();
-            } else {
-                //Either the button is held for 1500ms and the oven is turned off or we toggle moisture mode
-                self.IsWaitingForMoistureModeOffInterval = true;
-
-                //Start the timer
-                self.StartMoistureModeIntervalTimer();
-            }
-        } else {
-            //Twiddle thumbs
-        }
+        self.SteamDown();
     };
 
     self.SteamButtonUp = function () {
-        //If the oven is off - we don't care because we just 
-        if (self.IsWaitingForMoistureModeOffInterval) {
-            //‘Steam’ LED will
-            //illuminate when
-            //automated
-            //Moisture Mode is
-            //set (H-1-H-5) or
-            //during each
-            //moisture
-            //injection in H-0.
-
-            //If moisture mode is H-0
-            if (self.CurrentMoistureMode() === 0)
-                if (self.IsCooking()) self.SteamShot();
-                else
-                    self.ToggleMoistureMode();
-        }
-
-        self.ClearMoistureModeTimer(); //Stop the timer
-        self.IsWaitingForMoistureModeOffInterval = false; //Always reset this
+        self.SteamUp();
     };
 
     self.ActualTemperatureRounded = ko.computed(function () {

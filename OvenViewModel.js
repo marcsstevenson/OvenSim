@@ -3,7 +3,7 @@
 /// <reference path="StatusProperties.js" />
 /// <reference path="UserInterface.js" />
 /// <reference path="Subscriptions.js" />
-/// <reference path="OvenTemperatureManager.js" />
+/// <reference path="OvenManager.js" />
 
 function OvenViewModel() {
     var self = this;
@@ -11,7 +11,7 @@ function OvenViewModel() {
     //Expand from external files
     Timers(self);
     StatusProperties(self);
-    OvenTemperatureManager(self);
+    OvenManager(self);
     UserInterface(self);
     Subscriptions(self);
 

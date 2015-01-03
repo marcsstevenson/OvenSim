@@ -4,6 +4,7 @@ function StatusProperties(self) {
     self.StartTemperature = 18;
     self.MaxTargetTemperature = 240;
     self.DefaultTargetTemperature = 150;
+    self.DefaultTimerValue = 60;
     self.MinTargetTemperature = 80;
     self.MaxTimeDilation = 1;
     self.MinTimeDilation = 1;
@@ -11,8 +12,12 @@ function StatusProperties(self) {
     self.TimeDilation = ko.observable(1);
     self.IsHeating = ko.observable(1);
 
-    self.ActualTemperature = ko.observable(self.StartTemperature);
-    self.TargetTemperature = ko.observable(self.DefaultTargetTemperature);
+    self.ActualTemperature = ko.observable(0);
+    self.TargetTemperature = ko.observable(0);
+
+    self.TimerStartValue = ko.observable(0);
+    self.TimerCurrentValue = ko.observable(0);
+    self.TimerRunning = ko.observable(false);
 
     //Status Values
     self.OvenIsOn = ko.observable();
@@ -41,6 +46,11 @@ function StatusProperties(self) {
 
         self.ActualTemperature(self.StartTemperature);
         self.TargetTemperature(self.DefaultTargetTemperature);
+
+        self.TimerStartValue(self.DefaultTimerValue);
+        self.TimerCurrentValue(self.DefaultTimerValue);
+        self.TimerRunning(false);
+
         self.MoistureModeOn(false);
         self.DisplayingMoistureSetup(false);
         self.BlinkOn(false);
@@ -49,10 +59,10 @@ function StatusProperties(self) {
         //UI Functions
         self.Temp_DownClickFunction(self.DecreaseTargetTemperature);
         self.Temp_UpClickFunction(self.IncreaseTargetTemperature);
-        self.Timer_DownClickFunction(self.DecreaseTargetTimererature);
-        self.Timer_UpClickFunction(self.DecreaseTargetTimererature);
+        self.Timer_DownClickFunction(self.DecreaseTimer);
+        self.Timer_UpClickFunction(self.IncreaseTimer);
         self.TopDisplayFunction(self.TargetTemperature);
-        self.BottomDisplayFunction(null); //TODO
+        self.BottomDisplayFunction(self.TimerDisplayValue);
         self.IsManualMode(true);
         self.IsCooking(true);
         self.SteamShooting(false);

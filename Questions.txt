@@ -1,0 +1,2 @@
+* What is the default timer value? 125? 
+* Timer increment/decrement value is 5?
