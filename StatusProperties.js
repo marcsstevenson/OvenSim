@@ -4,19 +4,20 @@ function StatusProperties(self) {
     self.StartTemperature = 18;
     self.MaxTargetTemperature = 240;
     self.DefaultTargetTemperature = 150;
-    self.DefaultTimerValue = 60;
+    self.DefaultTimerValue = 0;
     self.MinTargetTemperature = 80;
+
     self.MaxTimeDilation = 1;
     self.MinTimeDilation = 1;
-
     self.TimeDilation = ko.observable(1);
-    self.IsHeating = ko.observable(1);
 
     self.ActualTemperature = ko.observable(0);
     self.TargetTemperature = ko.observable(0);
 
-    self.TimerStartValue = ko.observable(0);
-    self.TimerCurrentValue = ko.observable(0);
+    self.TimerStartValue = ko.observable(0); //moment.duration
+    self.TimerCurrentValue = ko.observable(0); //moment.duration
+    self.TimerDirectionUp = ko.observable(true);
+    self.TimerStarted = ko.observable(false);
     self.TimerRunning = ko.observable(false);
 
     //Status Values
@@ -32,7 +33,7 @@ function StatusProperties(self) {
     self.IsManualMode = ko.observable();
     self.IsCooking = ko.observable();
     self.SteamShooting = ko.observable();
-    self.ElementOn = ko.observable(false);
+    self.IsHeating = ko.observable(false);
     
     //Persistent status values (these remain after power on/off and are therefore not reset by default)
     self.CurrentMoistureMode = ko.observable(0); //0-5 are the valid values
@@ -49,6 +50,8 @@ function StatusProperties(self) {
 
         self.TimerStartValue(self.DefaultTimerValue);
         self.TimerCurrentValue(self.DefaultTimerValue);
+        self.TimerDirectionUp(true);
+        self.TimerStarted(false);
         self.TimerRunning(false);
 
         self.MoistureModeOn(false);
@@ -66,6 +69,7 @@ function StatusProperties(self) {
         self.IsManualMode(true);
         self.IsCooking(true);
         self.SteamShooting(false);
+        self.IsHeating(false);
 
         //Clear all timers
         self.ClearPowerTimer();
@@ -74,5 +78,4 @@ function StatusProperties(self) {
         self.ClearMoistureModeTimer();
         self.ClearBlinkTimer();
     };
-
 }

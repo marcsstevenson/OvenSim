@@ -1,2 +1,4 @@
-* What is the default timer value? 125? 
-* Timer increment/decrement value is 5?
+* Timer increment/decrement value is 5? 1?
+* Can increasing or decreasing of the timer or temperature be sped up by holding down + or -?
+* What happens if timer +/- is used while the timer is running? Nothing or is the timer value given add/minus
+* Does the timer complete alarm ever stop without the user hitting the time button?

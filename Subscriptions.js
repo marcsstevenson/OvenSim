@@ -34,4 +34,7 @@ function Subscriptions(self) {
         self.Log("SteamShooting: " + self.SteamShooting());
     });
 
+    self.IsHeating.subscribe(function () {
+        self.Log("IsHeating: " + self.IsHeating());
+    });
 }

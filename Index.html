@@ -7,6 +7,7 @@
     <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
     <script src="Lib/knockout-3.1.0.js"></script>
     <script src="Lib/jquery-2.1.1.min.js"></script>
+    <script src="Lib/moment-2.8.4.min.js"></script>
 
     <script src="OvenViewModel.js"></script>
     <script src="StatusProperties.js"></script>
@@ -49,7 +50,7 @@
         <div class="ButtonsLeftMargin ButtonsTopMargin">
             <button class="btn" data-bind="event: { mousedown: LightPowerButtonDown, mouseup: LightPowerButtonUp }, css: LightOn_LightPower() ? 'btnLightPower_On' : 'btnLightPower_Off'"></button>
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
-            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTimer, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="event: { mousedown: TimerButtonDown, mouseup: TimerButtonUp }, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
         </div>
         <div class="TimerTopPadding SplitLeftMargin">
             <div class="btnTimer_Down" data-bind="click: btnTimer_DownClick"></div>
@@ -58,8 +59,6 @@
     </div>
     <div>
         <h1 data-bind="text: ActualTemperature">Temperature</h1>
-        <!--<button class="btn btn-success" data-bind="visible: !IsOn(), click: On">Turn On</button>
-        <button class="btn btn-default" data-bind="visible: IsOn(), click: Off">Turn Off</button>-->
 
         <span data-bind="text: '(x' + TimeDilation() + ')'"></span>
         <button class="btn" data-bind="click: IncreaseTimeDilation">faster</button>

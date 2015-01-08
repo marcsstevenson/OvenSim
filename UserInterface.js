@@ -18,7 +18,7 @@ function UserInterface(self) {
             if (self.DisplayingActualTemperature()) {
                 return self.DisplayingActualFlash();
             } else {
-                return self.ElementOn();
+                return self.IsHeating();
             }
         } else
             return false;
@@ -33,7 +33,7 @@ function UserInterface(self) {
     });
 
     self.LightOn_Timer = ko.computed(function () {
-        return false;
+        return self.TimerRunning();
     });
 
     self.ButtonClickSteam = function () {
@@ -50,10 +50,6 @@ function UserInterface(self) {
 
     self.ButtonClickFan = function () {
         self.IsFanLow(!self.IsFanLow());
-    };
-
-    self.ButtonClickTimer = function () {
-
     };
 
     self.Temp_DownClickFunction = ko.observable();
@@ -122,6 +118,28 @@ function UserInterface(self) {
         self.SteamUp();
     };
 
+    self.TimerButtonDown = function () {
+        if (self.OvenIsOn()) {
+            //Either the button is held for 1500ms and moisture mode setup is started we toggle moisture mode on
+            self.IsWaitingForPowerOffInterval = true;
+
+            //Start the timer
+            self.StartPowerIntervalTimer();
+        } else {
+            //Just turn the oven on
+            self.TurnOvenOn();
+        }
+    };
+
+    self.TimerButtonUp = function () {
+        //If the oven is off - we don't care because we just 
+        if (self.IsWaitingForPowerOffInterval) {
+            self.ToggleLight();
+        }
+        self.ClearPowerTimer(); //Stop the timer
+        self.IsWaitingForPowerOffInterval = false; //Always reset this
+    };
+    
     self.ActualTemperatureRounded = ko.computed(function () {
         //Round the value
         return Math.round(self.ActualTemperature());
@@ -130,6 +148,20 @@ function UserInterface(self) {
     self.MoistureModeDisplay = ko.computed(function () {
         return self.BlinkOn() === true ? 'H-' + self.CurrentMoistureMode() : '';
     });
+
+    self.TimerDisplayValue = function () {
+        if (self.TimerRunning()) {
+            return self.TimerCurrentValue();
+        } else {
+            if (self.TimerStartValue() <= -1) {
+                return "InF";
+            } else if (self.TimerStartValue() === 0) {
+                return "---";
+            } else {
+                return self.TimerStartValue();
+            }
+        }
+    };
 
     self.Log = function (message) {
         self.Log(message);
