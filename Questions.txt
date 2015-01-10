@@ -1,4 +1,4 @@
 * Timer increment/decrement value is 5? 1?
-* Can increasing or decreasing of the timer or temperature be sped up by holding down + or -?
+* Can increasing or decreasing of the timer or temperature be sped up by holding down + or -? - A: Hold down to slowly increase before +/- speeding up after x seconds
 * What happens if timer +/- is used while the timer is running? Nothing or is the timer value given add/minus
 * Does the timer complete alarm ever stop without the user hitting the time button?

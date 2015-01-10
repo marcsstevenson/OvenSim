@@ -1,3 +1,8 @@
+
+/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" />
+/// <reference path="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.js"/>
+
 describe("Oven", function () {
     var ovenViewModel;
 
