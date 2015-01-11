@@ -1,6 +1,18 @@
 /// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
 
 function UserInterface(self) {
+    //Steam
+    self.SteamButtonDown = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.SteamDown();
+    };
+
+    self.SteamButtonUp = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.SteamUp();
+    };
 
     self.LightOn_Steam = ko.computed(function () {
         if (self.OvenIsOn()) {
@@ -9,9 +21,29 @@ function UserInterface(self) {
             return false;
     });
 
+    //Program
+    self.ProgramButtonUp = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.ProgramUp();
+    };
+
+    self.ProgramButtonDown = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.ProgramDown();
+    };
+
     self.LightOn_Program = ko.computed(function () {
         return false;
     });
+
+    //Temp
+    self.TempButtonUp = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.ToggleTempDisplay();
+    };
 
     self.LightOn_Temp = ko.computed(function () {
         if (self.OvenIsOn()) {
@@ -24,121 +56,89 @@ function UserInterface(self) {
             return false;
     });
 
+    //LightPower
+    self.LightPowerButtonDown = function () {
+        self.LightPowerDown();
+    };
+
+    self.LightPowerButtonUp = function () {
+        self.LightPowerUp();
+    };
+
     self.LightOn_LightPower = ko.computed(function () {
         return self.LightIsOn();
     });
+
+    //Fan
+    self.ButtonClickFan = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.FanFunction();
+    };
 
     self.LightOn_Fan = ko.computed(function () {
         return self.IsFanLow();
     });
 
+    //Timer
+    self.TimerButtonDown = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.TimerDown();
+    };
+
+    self.TimerButtonUp = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.TimerUp();
+    };
+
     self.LightOn_Timer = ko.computed(function () {
         return self.TimerRunning();
     });
 
-    self.ButtonClickSteam = function () {
+    //Dials - Start
+    //Temp Plus/Minus
 
+    self.btnTemp_MinusClick = function () {
+        if (!self.OvenIsOn()) return;
+
+        self.Temp_MinusClickFunction()();
     };
 
-    self.ButtonClickProgram = function () {
+    self.btnTemp_PlusClick = function () {
+        if (!self.OvenIsOn()) return;
 
-    };
-
-    self.ButtonClickTemp = function () {
-        self.ToggleTempDisplay();
-    };
-
-    self.ButtonClickFan = function () {
-        self.IsFanLow(!self.IsFanLow());
-    };
-
-    self.Temp_DownClickFunction = ko.observable();
-    self.btnTemp_DownClick = function () {
-        self.Temp_DownClickFunction()();
-    };
-
-    self.Temp_UpClickFunction = ko.observable();
-    self.btnTemp_UpClick = function () {
         self.Temp_UpClickFunction()();
     };
 
-    self.Timer_DownClickFunction = ko.observable();
-    self.btnTimer_DownClick = function () {
+    self.btnTimer_MinusClick = function () {
+        if (!self.OvenIsOn()) return;
+
         self.Timer_DownClickFunction()();
     };
 
-    self.Timer_UpClickFunction = ko.observable();
-    self.btnTimer_UpClick = function () {
+    self.btnTimer_PlusClick = function () {
+        if (!self.OvenIsOn()) return;
+
         self.Timer_UpClickFunction()();
     };
 
-    self.TopDisplayFunction = ko.observable(null);
+    //Dials - End
+
+    //Displays - Start
+
     self.TopDisplay = ko.computed(function () {
         return self.TopDisplayFunction() ? self.TopDisplayFunction()() : '';
     });
 
-    self.BottomDisplayFunction = ko.observable(null);
     self.BottomDisplay = ko.computed(function () {
         return self.BottomDisplayFunction() ? self.BottomDisplayFunction()() : '';
     });
 
-    //Press ‘On-Off/Light’ key once to turn
-    //the oven ‘On’
-    //When oven is turned ‘On’, press ‘On-Off/Light’
-    //key to switch oven light ‘On-Off’.
-    //Press and hold ‘On-Off/Light’ key for 1.5 seconds
-    //to turn the oven ‘Off’.
-    self.LightPowerButtonDown = function () {
-        if (self.OvenIsOn()) {
-            //Either the button is held for 1500ms and moisture mode setup is started we toggle moisture mode on
-            self.IsWaitingForPowerOffInterval = true;
+    //Displays - End
 
-            //Start the timer
-            self.StartPowerIntervalTimer();
-        } else {
-            //Just turn the oven on
-            self.TurnOvenOn();
-        }
-    };
-
-    self.LightPowerButtonUp = function () {
-        //If the oven is off - we don't care because we just 
-        if (self.IsWaitingForPowerOffInterval) {
-            self.ToggleLight();
-        }
-        self.ClearPowerTimer(); //Stop the timer
-        self.IsWaitingForPowerOffInterval = false; //Always reset this
-    };
-
-    self.SteamButtonDown = function () {
-        self.SteamDown();
-    };
-
-    self.SteamButtonUp = function () {
-        self.SteamUp();
-    };
-
-    self.TimerButtonDown = function () {
-        if (self.OvenIsOn()) {
-            //Either the button is held for 1500ms and moisture mode setup is started we toggle moisture mode on
-            self.IsWaitingForPowerOffInterval = true;
-
-            //Start the timer
-            self.StartPowerIntervalTimer();
-        } else {
-            //Just turn the oven on
-            self.TurnOvenOn();
-        }
-    };
-
-    self.TimerButtonUp = function () {
-        //If the oven is off - we don't care because we just 
-        if (self.IsWaitingForPowerOffInterval) {
-            self.ToggleLight();
-        }
-        self.ClearPowerTimer(); //Stop the timer
-        self.IsWaitingForPowerOffInterval = false; //Always reset this
-    };
+    //Computed - Start
     
     self.ActualTemperatureRounded = ko.computed(function () {
         //Round the value
@@ -146,12 +146,19 @@ function UserInterface(self) {
     });
 
     self.MoistureModeDisplay = ko.computed(function () {
-        return self.BlinkOn() === true ? 'H-' + self.CurrentMoistureMode() : '';
+        return self.MoistureModeBlinkOn() === true ? 'H-' + self.CurrentMoistureMode() : '';
     });
 
+    //Computed - End
+
+    //Utils
+
     self.TimerDisplayValue = function () {
-        if (self.TimerRunning()) {
-            return self.TimerCurrentValue();
+        if (self.TimerStarted()) {
+            if (self.TimerBlinkOn())
+                return self.ConvertDurtaionToDisplay(self.TimerCurrentValue());
+            else
+                return '';
         } else {
             if (self.TimerStartValue() <= -1) {
                 return "InF";
@@ -161,6 +168,14 @@ function UserInterface(self) {
                 return self.TimerStartValue();
             }
         }
+    };
+
+    self.ConvertDurtaionToDisplay = function (duration) {
+        if (duration.minutes() > 10) { return duration.minutes(); }
+
+        //console.log(duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds);
+
+        return duration.minutes() + ':' + (duration.seconds() < 10 ? '0' : '') + duration.seconds();
     };
 
     self.Log = function (message) {

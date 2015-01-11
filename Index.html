@@ -28,41 +28,47 @@
 </head>
 
 <body>
-    <div class="controlPanel">
+    <div class="controlPanel" style="float: left">
         <div class="TopPadding">
 
         </div>
         <div class="displayBox DisplayLeftMargin" data-bind="text: TopDisplay"></div>
 
         <div class="ButtonsLeftMargin ButtonsTopMargin">
+            <!--Steam-->
             <button class="btn" data-bind="event: { mousedown: SteamButtonDown, mouseup: SteamButtonUp }, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
-            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickProgram, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
-            <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickTemp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
+            <!--Program-->
+            <button class="btn ButtonLeftMargin" data-bind="event: { mousedown: ProgramButtonDown, mouseup: ProgramButtonUp }, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
+            <!--Temp-->
+            <button class="btn ButtonLeftMargin" data-bind="click: TempButtonUp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
         </div>
         <div class="TempTopPadding SplitLeftMargin">
-            <div class="btnTemp_Down" data-bind="click: btnTemp_DownClick"></div>
-            <div class="btnTemp_Up" data-bind="click: btnTemp_UpClick"></div>
+            <div class="btnTemp_Minus" data-bind="click: btnTemp_MinusClick"></div>
+            <div class="btnTemp_Plus" data-bind="click: btnTemp_PlusClick"></div>
         </div>
 
         <div class="BottomDisplayTopMargin">
             <div class="displayBox DisplayLeftMargin" data-bind="text: BottomDisplay"></div>
         </div>
         <div class="ButtonsLeftMargin ButtonsTopMargin">
+            <!--LightPowerButton-->
             <button class="btn" data-bind="event: { mousedown: LightPowerButtonDown, mouseup: LightPowerButtonUp }, css: LightOn_LightPower() ? 'btnLightPower_On' : 'btnLightPower_Off'"></button>
+            <!--Fan-->
             <button class="btn ButtonLeftMargin" data-bind="click: ButtonClickFan, css: LightOn_Fan() ? 'btnFan_On' : 'btnFan_Off'"></button>
+            <!--Timer-->
             <button class="btn ButtonLeftMargin" data-bind="event: { mousedown: TimerButtonDown, mouseup: TimerButtonUp }, css: LightOn_Timer() ? 'btnTimer_On' : 'btnTimer_Off'"></button>
         </div>
         <div class="TimerTopPadding SplitLeftMargin">
-            <div class="btnTimer_Down" data-bind="click: btnTimer_DownClick"></div>
-            <div class="btnTimer_Up" data-bind="click: btnTimer_UpClick"></div>
+            <div class="btnTimer_Minus" data-bind="click: btnTimer_MinusClick"></div>
+            <div class="btnTimer_Plus" data-bind="click: btnTimer_PlusClick"></div>
         </div>
     </div>
-    <div>
+    <div style="float: left; padding: 10px;">
         <h1 data-bind="text: ActualTemperature">Temperature</h1>
 
         <span data-bind="text: '(x' + TimeDilation() + ')'"></span>
-        <button class="btn" data-bind="click: IncreaseTimeDilation">faster</button>
         <button class="btn" data-bind="click: DecreaseTimeDilation">slower</button>
+        <button class="btn" data-bind="click: IncreaseTimeDilation">faster</button>
 
         <label>Set Temperature</label>
         <input data-bind="value: TargetTemperature" type="number" style="width: 200px" />

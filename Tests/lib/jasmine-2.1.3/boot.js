@@ -1,9 +1,9 @@
 /**
- Starting with version 2.0, this file "boots" Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after `jasmine.js` and `jasmine_html.js`, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.
+ Starting with version 2.0, this file "boots" Jasmine, performing all of the necessary initialization before executing the loaded environment and all of a project's specs. This file should be loaded after self.ClearMoistureModeBlinkTimerjasmine.jsself.ClearMoistureModeBlinkTimer and self.ClearMoistureModeBlinkTimerjasmine_html.jsself.ClearMoistureModeBlinkTimer, but before any project source files or spec files are loaded. Thus this file can also be used to customize Jasmine for a project.
 
- If a project is using Jasmine via the standalone distribution, this file can be customized directly. If a project is using Jasmine via the [Ruby gem][jasmine-gem], this file can be copied into the support directory via `jasmine copy_boot_js`. Other environments (e.g., Python) will have different mechanisms.
+ If a project is using Jasmine via the standalone distribution, this file can be customized directly. If a project is using Jasmine via the [Ruby gem][jasmine-gem], this file can be copied into the support directory via self.ClearMoistureModeBlinkTimerjasmine copy_boot_jsself.ClearMoistureModeBlinkTimer. Other environments (e.g., Python) will have different mechanisms.
 
- The location of `boot.js` can be specified and/or overridden in `jasmine.yml`.
+ The location of self.ClearMoistureModeBlinkTimerboot.jsself.ClearMoistureModeBlinkTimer can be specified and/or overridden in self.ClearMoistureModeBlinkTimerjasmine.ymlself.ClearMoistureModeBlinkTimer.
 
  [jasmine-gem]: http://github.com/pivotal/jasmine-gem
  */
@@ -13,7 +13,7 @@
   /**
    * ## Require &amp; Instantiate
    *
-   * Require Jasmine's core files. Specifically, this requires and attaches all of Jasmine's code to the `jasmine` reference.
+   * Require Jasmine's core files. Specifically, this requires and attaches all of Jasmine's code to the self.ClearMoistureModeBlinkTimerjasmineself.ClearMoistureModeBlinkTimer reference.
    */
   window.jasmine = jasmineRequire.core(jasmineRequire);
 
@@ -35,7 +35,7 @@
   var jasmineInterface = jasmineRequire.interface(jasmine, env);
 
   /**
-   * Add all of the Jasmine global/public interface to the proper global, so a project can use the public interface directly. For example, calling `describe` in specs instead of `jasmine.getEnv().describe`.
+   * Add all of the Jasmine global/public interface to the proper global, so a project can use the public interface directly. For example, calling self.ClearMoistureModeBlinkTimerdescribeself.ClearMoistureModeBlinkTimer in specs instead of self.ClearMoistureModeBlinkTimerjasmine.getEnv().describeself.ClearMoistureModeBlinkTimer.
    */
   if (typeof window == "undefined" && typeof exports == "object") {
     extend(exports, jasmineInterface);
@@ -58,7 +58,7 @@
 
   /**
    * ## Reporters
-   * The `HtmlReporter` builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).
+   * The self.ClearMoistureModeBlinkTimerHtmlReporterself.ClearMoistureModeBlinkTimer builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).
    */
   var htmlReporter = new jasmine.HtmlReporter({
     env: env,
@@ -70,13 +70,13 @@
   });
 
   /**
-   * The `jsApiReporter` also receives spec results, and is used by any environment that needs to extract the results  from JavaScript.
+   * The self.ClearMoistureModeBlinkTimerjsApiReporterself.ClearMoistureModeBlinkTimer also receives spec results, and is used by any environment that needs to extract the results  from JavaScript.
    */
   env.addReporter(jasmineInterface.jsApiReporter);
   env.addReporter(htmlReporter);
 
   /**
-   * Filter which specs will be run by matching the start of the full name against the `spec` query param.
+   * Filter which specs will be run by matching the start of the full name against the self.ClearMoistureModeBlinkTimerspecself.ClearMoistureModeBlinkTimer query param.
    */
   var specFilter = new jasmine.HtmlSpecFilter({
     filterString: function() { return queryString.getParam("spec"); }
@@ -97,7 +97,7 @@
   /**
    * ## Execution
    *
-   * Replace the browser window's `onload`, ensure it's called, and then run all of the loaded specs. This includes initializing the `HtmlReporter` instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.
+   * Replace the browser window's self.ClearMoistureModeBlinkTimeronloadself.ClearMoistureModeBlinkTimer, ensure it's called, and then run all of the loaded specs. This includes initializing the self.ClearMoistureModeBlinkTimerHtmlReporterself.ClearMoistureModeBlinkTimer instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.
    */
   var currentWindowOnload = window.onload;
 

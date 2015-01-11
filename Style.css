@@ -83,41 +83,41 @@
   padding: 0;
   display: inline-block;
 }
-.btnTemp_Down {
+.btnTemp_Minus {
   width: 81px;
   height: 63px;
   cursor: pointer;
   border: none;
   padding: 0;
   display: inline-block;
-  background-image: url('Images/btnTemp_Down.png');
+  background-image: url('Images/btnTemp_Minus.png');
 }
-.btnTemp_Up {
+.btnTemp_Plus {
   width: 81px;
   height: 63px;
   cursor: pointer;
   border: none;
   padding: 0;
   display: inline-block;
-  background-image: url('Images/btnTemp_Up.png');
+  background-image: url('Images/btnTemp_Plus.png');
 }
-.btnTimer_Down {
+.btnTimer_Minus {
   width: 81px;
   height: 63px;
   cursor: pointer;
   border: none;
   padding: 0;
   display: inline-block;
-  background-image: url('Images/btnTimer_Down.png');
+  background-image: url('Images/btnTimer_Minus.png');
 }
-.btnTimer_Up {
+.btnTimer_Plus {
   width: 81px;
   height: 63px;
   cursor: pointer;
   border: none;
   padding: 0;
   display: inline-block;
-  background-image: url('Images/btnTimer_Up.png');
+  background-image: url('Images/btnTimer_Plus.png');
 }
 /*Layout*/
 .TopPadding {

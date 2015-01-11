@@ -15,7 +15,6 @@ function OvenViewModel() {
     UserInterface(self);
     Subscriptions(self);
 
-    self.TimerId = 0;
     self.ToggleLight = function () {
         self.LightIsOn(!self.LightIsOn());
     }
@@ -31,78 +30,38 @@ function OvenViewModel() {
         self.TopDisplayFunction(null);
     }
 
-    self.Start = function () {
+    self.TimerStart = function () {
         self.StartIntervalTimer();
     }
 
-    self.Stop = function () {
+    self.TimerStop = function () {
     }
 
-    self.ToggleTempDisplay = function () {
-        var currentValue = self.DisplayingActualTemperature();
+    //Time Dilation - Start
 
-        if (currentValue)
-            self.StopDisplayingActualTemperature();
-        else
-            self.StartDisplayingActualTemperature();
-    }
-
-    self.StartDisplayingActualTemperature = function () {
-        //Stop the temp display timers
-        self.StartTempDisplayIntervalTimer();
-        self.DisplayingActualTemperature(true);
-
-        self.TopDisplayFunction(self.ActualTemperatureRounded);
+    self.IncreaseTimeDilation = function () {
+        self.SetTimeDilation(self.TimeDilation() * 2);
     };
 
-    self.StopDisplayingActualTemperature = function () {
-        //Stop the temp display timers
-        self.ClearTempDisplayTimer();
-        self.DisplayingActualTemperature(false);
-
-        self.TopDisplayFunction(self.TargetTemperature);
+    self.DecreaseTimeDilation = function () {
+        self.SetTimeDilation(self.TimeDilation() / 2);
     };
 
-    self.ToggleDisplayingActualFlash = function() {
-        self.DisplayingActualFlash(!self.DisplayingActualFlash());
-    }
+    self.SetTimeDilation = function (newValue) {
+        self.Log(newValue);
+        if (newValue >= self.MaxTimeDilation) //Ensure that we do not go above our max target
+        {
+            self.TimeDilation(self.MaxTimeDilation);
+            return;
+        }
+        else if (newValue <= self.MinTimeDilation) //Ensure that we do not go below min target
+        {
+            self.TimeDilation(self.MinTimeDilation);
+            return;
+        }
 
-    self.StopDisplayingActualFlash = function () {
-        self.DisplayingActualFlash(false);
-    }
-    
-    self.StartDisplayingMoistureModeSetup = function () {
-        self.DisplayingMoistureSetup(true);
-        self.StartBlinkIntervalTimer();
-        self.TopDisplayFunction(self.MoistureModeDisplay);
-        self.Temp_DownClickFunction(self.MoistureModeDown);
-        self.Temp_UpClickFunction(self.MoistureModeUp);
-    };
-
-    self.StopDisplayingMoistureMode = function () {
-        self.DisplayingMoistureSetup(false);
-        self.ClearBlinkTimer();
-        self.TopDisplayFunction(self.TargetTemperature);
-        self.Temp_DownClickFunction(self.DecreaseTargetTemperature);
-        self.Temp_UpClickFunction(self.IncreaseTargetTemperature);
-    };
-    
-    //Steam and moisture
-    self.ToggleMoistureMode = function() {
-        self.MoistureModeOn(!self.MoistureModeOn());
-    };
-
-    self.MoistureModeDown = function () {
-        self.CurrentMoistureMode(self.CurrentMoistureMode() === 0 ? 5 : self.CurrentMoistureMode() - 1);
-    };
-
-    self.MoistureModeUp = function () {
-        self.CurrentMoistureMode(self.CurrentMoistureMode() === 5 ? 0 : self.CurrentMoistureMode() + 1);
-    };
-    
-    self.SteamShot = function () {
-        self.SteamShooting(true);
-        self.StartSteamShotModeIntervalTimer();
+        self.Log(newValue);
+        self.TimeDilation(newValue);
     };
 
     self.Log = function(entry) {

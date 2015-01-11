@@ -1,0 +1,4 @@
+* Handle timer hits zero
+* Handle timer hits max (999)
+* Beep on timer completion
+* Then onto probe mode

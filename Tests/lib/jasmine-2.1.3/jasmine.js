@@ -2265,28 +2265,28 @@ getJasmineRequireObj().matchersUtil = function(j$) {
       return a.message == b.message;
     }
 
-    // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    // Identical objects are equal. self.ClearMoistureModeBlinkTimer0 === -0self.ClearMoistureModeBlinkTimer, but they aren't identical.
+    // See the [Harmony self.ClearMoistureModeBlinkTimeregalself.ClearMoistureModeBlinkTimer proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
     if (a === b) { return a !== 0 || 1 / a == 1 / b; }
-    // A strict comparison is necessary because `null == undefined`.
+    // A strict comparison is necessary because self.ClearMoistureModeBlinkTimernull == undefinedself.ClearMoistureModeBlinkTimer.
     if (a === null || b === null) { return a === b; }
     var className = Object.prototype.toString.call(a);
     if (className != Object.prototype.toString.call(b)) { return false; }
     switch (className) {
       // Strings, numbers, dates, and booleans are compared by value.
       case '[object String]':
-        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-        // equivalent to `new String("5")`.
+        // Primitives and their corresponding object wrappers are equivalent; thus, self.ClearMoistureModeBlinkTimer"5"self.ClearMoistureModeBlinkTimer is
+        // equivalent to self.ClearMoistureModeBlinkTimernew String("5")self.ClearMoistureModeBlinkTimer.
         return a == String(b);
       case '[object Number]':
-        // `NaN`s are equivalent, but non-reflexive. An `egal` comparison is performed for
+        // self.ClearMoistureModeBlinkTimerNaNself.ClearMoistureModeBlinkTimers are equivalent, but non-reflexive. An self.ClearMoistureModeBlinkTimeregalself.ClearMoistureModeBlinkTimer comparison is performed for
         // other numeric values.
         return a != +a ? b != +b : (a === 0 ? 1 / a == 1 / b : a == +b);
       case '[object Date]':
       case '[object Boolean]':
         // Coerce dates and booleans to numeric primitive values. Dates are compared by their
         // millisecond representations. Note that invalid dates with millisecond representations
-        // of `NaN` are not equivalent.
+        // of self.ClearMoistureModeBlinkTimerNaNself.ClearMoistureModeBlinkTimer are not equivalent.
         return +a == +b;
       // RegExps are compared by their source patterns and flags.
       case '[object RegExp]':
@@ -2297,7 +2297,7 @@ getJasmineRequireObj().matchersUtil = function(j$) {
     }
     if (typeof a != 'object' || typeof b != 'object') { return false; }
     // Assume equality for cyclic structures. The algorithm for detecting cyclic
-    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation self.ClearMoistureModeBlinkTimerJOself.ClearMoistureModeBlinkTimer.
     var length = aStack.length;
     while (length--) {
       // Linear search. Performance is inversely proportional to the number of
@@ -2320,7 +2320,7 @@ getJasmineRequireObj().matchersUtil = function(j$) {
         }
       }
     } else {
-      // Objects with different constructors are not equivalent, but `Object`s
+      // Objects with different constructors are not equivalent, but self.ClearMoistureModeBlinkTimerObjectself.ClearMoistureModeBlinkTimers
       // from different frames are.
       var aCtor = a.constructor, bCtor = b.constructor;
       if (aCtor !== bCtor && !(isFunction(aCtor) && (aCtor instanceof aCtor) &&
