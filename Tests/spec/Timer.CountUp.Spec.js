@@ -13,6 +13,10 @@ describe("Oven", function () {
         ovenViewModel = new OvenViewModel();
     });
 
+    afterEach(function () {
+        ovenViewModel.SetDefaults();
+    });
+
     describe("when power is On", function () {
         describe("when time is running", function () {
             it("Oven shall be heating", function () {

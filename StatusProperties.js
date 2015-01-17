@@ -20,6 +20,7 @@ function StatusProperties(self) {
     self.TimerDirectionUp = ko.observable(true);
     self.TimerStarted = ko.observable(false);
     self.TimerRunning = ko.observable(false);
+    self.TimerComplete = ko.observable(false);
 
     //Status Values
     self.OvenIsOn = ko.observable();
@@ -87,6 +88,7 @@ function StatusProperties(self) {
         self.ClearTempFlashTimer();
         self.ClearMoistureModeTimer();
         self.ClearMoistureModeBlinkTimer();
+        self.ClearTimerCountdownTimer();
     };
 
     self.SetDefaults_Timer = function () {
@@ -95,5 +97,6 @@ function StatusProperties(self) {
         self.TimerDirectionUp(true);
         self.TimerStarted(false);
         self.TimerRunning(false);
+        self.TimerComplete(false);
     };
 }

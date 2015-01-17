@@ -190,6 +190,7 @@ function Timers(self) {
     };
 
     self.NextTimerCountdownInterval = function () {
+
         //Update timer current value
         self.ClearTimerCountdownTimer();
 
