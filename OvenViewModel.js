@@ -71,10 +71,5 @@ function OvenViewModel() {
     //Set defaults
     self.SetDefaults();
 
-    //Temp - testing
-    self.TurnOvenOn();
-    
-    console.clear();
-
     return self;
 };

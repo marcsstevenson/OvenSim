@@ -37,4 +37,8 @@ function Subscriptions(self) {
     self.IsHeating.subscribe(function () {
         self.Log("IsHeating: " + self.IsHeating());
     });
+
+    self.CoreTemperatureCookingStarted.subscribe(function () {
+        self.Log("CoreTemperatureCookingStarted: " + self.CoreTemperatureCookingStarted());
+    });
 }

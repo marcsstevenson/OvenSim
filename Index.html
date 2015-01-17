@@ -21,6 +21,13 @@
         $(document).ready(function () {
             var viewModel = new OvenViewModel();
             ko.applyBindings(viewModel);
+
+            //Testing
+            viewModel.TurnOvenOn();
+            console.clear();
+
+            viewModel.ConnectCoreProbe();
+            viewModel.IncreaseTargetCoreTemperature();
         });
     </script>
     <title>Moffat Oven Simulator</title>
@@ -64,6 +71,10 @@
         </div>
     </div>
     <div style="float: left; padding: 10px;">
+        <div data-bind="text: 'Core probe connected: ' + CoreProbeConnected()"></div>
+        <button data-bind="click: ConnectCoreProbe, visible: !CoreProbeConnected()">Connect Core Probe</button>
+        <button data-bind="click: DisconnectCoreProbe, visible: CoreProbeConnected">Disconnect Core Probe</button>
+
         <h1 data-bind="text: ActualTemperature">Temperature</h1>
 
         <span data-bind="text: '(x' + TimeDilation() + ')'"></span>

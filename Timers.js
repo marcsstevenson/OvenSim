@@ -1,6 +1,8 @@
 /// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
 
 function Timers(self) {
+    var blinkInterval = 300;
+
     //***Steam - Start
 
     //MoistureMode
@@ -129,7 +131,7 @@ function Timers(self) {
     //MoistureModeBlink
 
     self.MoistureModeBlinkTimerId = 5;
-    self.MoistureModeBlinkOffInterval = 300; //ms - this is used to turn the oven off
+    self.MoistureModeBlinkOffInterval = blinkInterval; //ms - this is used to turn the oven off
 
     self.ClearMoistureModeBlinkTimer = function () {
         if (self.MoistureModeBlinkTimerId !== 5)
@@ -204,7 +206,7 @@ function Timers(self) {
     //TimerBlink
 
     self.TimerBlinkTimerId = 8;
-    self.TimerBlinkOffInterval = 300; //ms - this is used to turn the oven off
+    self.TimerBlinkOffInterval = blinkInterval; //ms - this is used to turn the oven off
 
     self.ClearTimerBlinkTimer = function () {
         if (self.TimerBlinkTimerId !== 8)
@@ -250,4 +252,56 @@ function Timers(self) {
 
         self.SetTemperature(self.ActualTemperature() + delta);
     };
+
+    //*** Core Temperature - Start
+
+    var coreTemperatureModeBlinkCount = 0;
+    self.CoreTemperatureModeBlinkTimerId = 9;
+    self.CoreTemperatureModeBlinkOffInterval = blinkInterval;
+
+    self.ClearCoreTemperatureModeBlinkTimer = function () {
+        if (self.CoreTemperatureModeBlinkTimerId !== 9)
+            clearInterval(self.CoreTemperatureModeBlinkTimerId);
+    };
+
+    self.StartCoreTemperatureModeBlinkIntervalTimer = function () {
+        self.ClearCoreTemperatureModeBlinkTimer(); //Stop the timer
+        self.CoreTemperatureModeBlinkTimerId = setInterval(function () { self.NextCoreTemperatureModeBlinkInterval(); }, self.CoreTemperatureModeBlinkOffInterval);
+    };
+
+    self.NextCoreTemperatureModeBlinkInterval = function () {
+        self.TargetCoreTemperatureBlinkOn(!self.TargetCoreTemperatureBlinkOn());
+        
+        //Set the based on every 2nd on blink
+        
+        self.TargetCoreTemperatureAlternate(coreTemperatureModeBlinkCount == 0);
+
+        coreTemperatureModeBlinkCount++;
+        if (coreTemperatureModeBlinkCount >= 4) coreTemperatureModeBlinkCount = 0; //Loop
+    };
+
+
+    //Actual Core Temp Display
+
+    self.CoreTemperatureDisplayTimerId = 10;
+    self.IsWaitingForCoreTemperatureDisplayInterval = false;
+    self.CoreTemperatureDisplayInterval = 5000; //ms
+
+    self.ClearCoreTemperatureDisplayTimer = function () {
+        if (self.CoreTemperatureDisplayTimerId !== 10)
+            clearInterval(self.CoreTemperatureDisplayTimerId);
+    };
+
+    self.StartCoreTemperatureDisplayIntervalTimer = function () {
+        self.ClearCoreTemperatureDisplayTimer(); //Stop the timer
+        self.CoreTemperatureDisplayTimerId = setInterval(function () { self.NextCoreTemperatureDisplayInterval(); }, self.CoreTemperatureDisplayInterval);
+    };
+
+    self.NextCoreTemperatureDisplayInterval = function () {
+        self.IsWaitingForCoreTemperatureDisplayInterval = false; //Always reset this
+        self.ClearCoreTemperatureDisplayTimer(); //Stop the timer
+        self.StopDisplayingActualCoreTemperature(); //CoreTemperatureDisplay off the oven
+    };
+
+    //*** Core Temperature - End
 }

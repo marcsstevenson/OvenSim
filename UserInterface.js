@@ -40,9 +40,9 @@ function UserInterface(self) {
 
     //Temp
     self.TempButtonUp = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.TempButtonUpFunction()) return;
 
-        self.ToggleTempDisplay();
+        self.TempButtonUpFunction()();
     };
 
     self.LightOn_Temp = ko.computed(function () {
@@ -84,17 +84,20 @@ function UserInterface(self) {
     self.TimerButtonDown = function () {
         if (!self.OvenIsOn()) return;
 
-        self.TimerDown();
+        self.TimerButtonDownFunction()();
     };
-
+    
     self.TimerButtonUp = function () {
         if (!self.OvenIsOn()) return;
-
-        self.TimerUp();
+        
+        self.TimerButtonUpFunction()();
     };
 
     self.LightOn_Timer = ko.computed(function () {
-        return self.TimerRunning();
+        if (self.LightOn_TimerFunction())
+            return self.LightOn_TimerFunction()();
+        else
+            return false;
     });
 
     //Dials - Start
@@ -151,7 +154,7 @@ function UserInterface(self) {
 
     //Computed - End
 
-    //Utils
+    //Display Functions - Start
 
     self.TimerDisplayValue = function () {
         if (self.TimerStarted()) {
@@ -169,6 +172,32 @@ function UserInterface(self) {
             }
         }
     };
+
+    self.CoreProbeDisplayValue = function () {
+        var coreProbeLabel = "CP";
+
+        if (self.TargetCoreTemperatureSet()) {
+            if (self.TargetCoreTemperatureBlinkOn()) {
+                
+                if (self.TargetCoreTemperatureAlternate()) {
+                    if (self.DisplayingActualCoreTemperature())
+                        return self.ActualCoreTemperature();
+                    else
+                        return self.TargetCoreTemperature();
+                } else {
+                    return coreProbeLabel;
+                }
+            }
+            else
+                return '';
+        } else {
+            return coreProbeLabel;
+        }
+    };
+
+    //Display Functions - End
+
+    //Utils
 
     self.ConvertDurtaionToDisplay = function (duration) {
         if (duration.minutes() > 10) { return duration.minutes(); }
