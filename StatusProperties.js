@@ -6,12 +6,10 @@ function StatusProperties(self) {
     self.MaxTargetTemperature = 240; //+ to increase the temperature (Max. 260°C / 500°F)
     self.MinTargetTemperature = 80; //- to decrease the temperature (Min. 60°C / 140°F)
     self.DefaultTargetTemperature = 150; //Oven Temperature is set to 150°C (325°F)
-    self.DisplayingActualTemperature = ko.observable();
 
     self.MaxTargetCoreTemperature = 90; //+ to increase temperature (Max. 90°C / 194°F)
     self.MinTargetCoreTemperature = 50; //- to decrease temperature (Min. 50°C / 122°F)
     self.DefaultTargetCoreTemperature = 65; //Oven Temperature is set to 150°C (325°F) - TODO: Confirm
-    self.DisplayingActualCoreTemperature = ko.observable();
     
     self.DefaultTimerValue = 0;
 
@@ -21,6 +19,8 @@ function StatusProperties(self) {
 
     self.ActualTemperature = ko.observable(0);
     self.TargetTemperature = ko.observable(0);
+    self.DisplayingActualCoreTemperature = ko.observable();
+    self.DisplayingActualTemperature = ko.observable();
 
     self.CoreProbeConnected = ko.observable(false);
     self.ActualCoreTemperature = ko.observable(0);
