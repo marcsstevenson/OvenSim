@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />-->
-    <!--<script data-require="knockout@*" data-semver="3.0.0" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-    <script data-require="jquery@*" data-semver="2.1.1" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-    <!--<script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
     <script src="Lib/knockout-3.1.0.js"></script>
     <script src="Lib/jquery-2.1.1.min.js"></script>
     <script src="Lib/moment-2.8.4.min.js"></script>
@@ -12,11 +8,14 @@
     <script src="OvenViewModel.js"></script>
     <script src="StatusProperties.js"></script>
     <script src="UserInterface.js"></script>
-    <script src="OvenProgram.js"></script>
+    
     <script src="Timers.js"></script>
     <script src="Subscriptions.js"></script>
-    <script src="OvenProgramStep.js"></script>
     <script src="OvenManager.js"></script>
+    <script src="OvenProgramFactory.js"></script>
+    <script src="OvenProgram.js"></script>
+    <script src="OvenProgramStep.js"></script>
+
     <script>
         $(document).ready(function () {
             var viewModel = new OvenViewModel();
@@ -26,8 +25,8 @@
             viewModel.TurnOvenOn();
             console.clear();
 
-            viewModel.ConnectCoreProbe();
-            viewModel.IncreaseTargetCoreTemperature();
+            //viewModel.ConnectCoreProbe();
+            //viewModel.IncreaseTargetCoreTemperature();
         });
     </script>
     <title>Moffat Oven Simulator</title>

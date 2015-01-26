@@ -1,7 +1,8 @@
 
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" />
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/jasmine/2.0.0/jasmine.js"/>
+/// <reference path="Lib/knockout-3.1.0.js" />
+/// <reference path="../../Lib/jquery-2.1.1.min.js" />
+/// <reference path="../lib/jasmine-2.1.3/jasmine.js"/>
+/// <reference path="../../OvenViewModel.js" />
 
 describe("Oven", function () {
     var ovenViewModel;
@@ -10,7 +11,15 @@ describe("Oven", function () {
         ovenViewModel = new OvenViewModel();
     });
 
+    it("The oven shall have 20 programs to use", function () {
+        expect(ovenViewModel.OvenPrograms().length).toEqual(20);
+    });
+    
     describe("when TurnOvenOn", function () {
+        beforeEach(function () {
+            ovenViewModel.TurnOvenOn();
+        });
+
         it("OvenIsOn shall be true", function () {
             expect(ovenViewModel.OvenIsOn()).toEqual(true);
         });

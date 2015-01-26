@@ -1,4 +1,4 @@
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="Lib/knockout-3.1.0.js" />
 
 function Subscriptions(self) {
     //Status Subscriptions

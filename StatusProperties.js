@@ -1,5 +1,6 @@
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="Lib/knockout-3.1.0.js" />
 /// <reference path="Lib/moment-2.8.4.min.js" />
+/// <reference path="OvenProgramFactory.js" />
 
 function StatusProperties(self) {
     self.StartTemperature = 18;
@@ -36,6 +37,14 @@ function StatusProperties(self) {
     self.TimerStarted = ko.observable(false);
     self.TimerRunning = ko.observable(false);
     self.TimerComplete = ko.observable(false);
+
+    //Programming
+    self.IsDisplayingPrograms = ko.observable(false);
+    self.IsEditingPrograms = ko.observable(false);
+    self.OvenPrograms = ko.observableArray(new OvenProgramFactory().BuildEmptyOvenPrograms());
+    self.DisplayingOvenProgramIndex = ko.observable(0);
+    self.CookingOvenProgramIndex = ko.observable(0);
+    self.CookingOvenProgramStepIndex = ko.observable(0);
 
     //Status Values
     self.OvenIsOn = ko.observable();
@@ -118,6 +127,9 @@ function StatusProperties(self) {
         self.ClearMoistureModeTimer();
         self.ClearMoistureModeBlinkTimer();
         self.ClearTimerCountdownTimer();
+
+        //Programming
+        self.SetDefaults_Programming();
     };
 
     self.SetDefaults_Timer = function () {
@@ -135,5 +147,14 @@ function StatusProperties(self) {
         self.LightOn_TimerFunction(self.TimerRunning);
         self.Timer_DownClickFunction(self.DecreaseTimer);
         self.Timer_UpClickFunction(self.IncreaseTimer);
+    };
+
+    self.SetDefaults_Programming = function () {
+        self.IsDisplayingPrograms(false);
+        self.IsEditingPrograms(false);
+        //The programs persist
+        self.DisplayingOvenProgramIndex(0);
+        self.CookingOvenProgramIndex(0);
+        self.CookingOvenProgramStepIndex(0);
     };
 }

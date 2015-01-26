@@ -1,4 +1,4 @@
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="Lib/knockout-3.1.0.js" />
 
 function UserInterface(self) {
     //Steam
@@ -35,7 +35,7 @@ function UserInterface(self) {
     };
 
     self.LightOn_Program = ko.computed(function () {
-        return false;
+        return self.IsDisplayingPrograms();
     });
 
     //Temp

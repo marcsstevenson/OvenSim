@@ -1,4 +1,4 @@
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="Lib/knockout-3.1.0.js" />
 /// <reference path="Timers.js" />
 /// <reference path="StatusProperties.js" />
 /// <reference path="UserInterface.js" />

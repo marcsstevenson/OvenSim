@@ -1,4 +1,4 @@
-/// <reference path="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js" />
+/// <reference path="Lib/knockout-3.1.0.js" />
 
 function Timers(self) {
     var blinkInterval = 300;
@@ -304,4 +304,30 @@ function Timers(self) {
     };
 
     //*** Core Temperature - End
+
+    //*** Programming - Start
+
+    //EditProgramsStart
+    self.EditProgramsStartTimerId = 11;
+    self.IsWaitingForEditProgramsStartInterval = ko.observable(false);
+    self.EditProgramsStartInterval = 2000; //ms
+
+    self.ClearEditProgramsStartTimer = function () {
+        if (self.EditProgramsStartTimerId !== 11)
+            clearInterval(self.EditProgramsStartTimerId);
+    };
+
+    self.StartEditProgramsStartIntervalTimer = function () {
+        self.ClearEditProgramsStartTimer(); //Stop the timer
+        self.EditProgramsStartTimerId = setInterval(function () { self.NextEditProgramsStartInterval(); }, self.EditProgramsStartInterval);
+    };
+
+    self.NextEditProgramsStartInterval = function () {
+        self.IsWaitingForEditProgramsStartInterval(false); //Always reset this
+        self.ClearEditProgramsStartTimer(); //Stop the timer
+
+        self.EditProgramsStart();
+    };
+
+    //*** Programming - End
 }
