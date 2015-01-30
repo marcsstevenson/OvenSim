@@ -307,26 +307,26 @@ function Timers(self) {
 
     //*** Programming - Start
 
-    //EditProgramsStart
-    self.EditProgramsStartTimerId = 11;
-    self.IsWaitingForEditProgramsStartInterval = ko.observable(false);
-    self.EditProgramsStartInterval = 2000; //ms
+    //EditProgramStart
+    self.EditProgramStartTimerId = 11;
+    self.IsWaitingForEditProgramStartInterval = ko.observable(false);
+    self.EditProgramStartInterval = 2000; //ms
 
-    self.ClearEditProgramsStartTimer = function () {
-        if (self.EditProgramsStartTimerId !== 11)
-            clearInterval(self.EditProgramsStartTimerId);
+    self.ClearEditProgramStartTimer = function () {
+        if (self.EditProgramStartTimerId !== 11)
+            clearInterval(self.EditProgramStartTimerId);
     };
 
-    self.StartEditProgramsStartIntervalTimer = function () {
-        self.ClearEditProgramsStartTimer(); //Stop the timer
-        self.EditProgramsStartTimerId = setInterval(function () { self.NextEditProgramsStartInterval(); }, self.EditProgramsStartInterval);
+    self.StartEditProgramStartIntervalTimer = function () {
+        self.ClearEditProgramStartTimer(); //Stop the timer
+        self.EditProgramStartTimerId = setInterval(function () { self.NextEditProgramStartInterval(); }, self.EditProgramStartInterval);
     };
 
-    self.NextEditProgramsStartInterval = function () {
-        self.IsWaitingForEditProgramsStartInterval(false); //Always reset this
-        self.ClearEditProgramsStartTimer(); //Stop the timer
+    self.NextEditProgramStartInterval = function () {
+        self.IsWaitingForEditProgramStartInterval(false); //Always reset this
+        self.ClearEditProgramStartTimer(); //Stop the timer
 
-        self.EditProgramsStart();
+        self.ProgrammingLongClick();
     };
 
     //*** Programming - End

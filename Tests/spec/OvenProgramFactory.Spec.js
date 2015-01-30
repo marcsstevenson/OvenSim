@@ -20,7 +20,7 @@ describe("OvenProgramFactory", function () {
             var emptyOvenPrograms = ovenProgramFactory.BuildEmptyOvenPrograms();
 
             for (var i = 0; i < emptyOvenPrograms.length; i++) {
-                expect(emptyOvenPrograms.OvenProgramSteps().length).toEqual(3);
+                expect(emptyOvenPrograms[i].OvenProgramSteps().length).toEqual(3);
             }
         });
     });

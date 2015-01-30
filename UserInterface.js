@@ -35,7 +35,7 @@ function UserInterface(self) {
     };
 
     self.LightOn_Program = ko.computed(function () {
-        return self.IsDisplayingPrograms();
+        return self.IsProgramming();
     });
 
     //Temp
@@ -112,13 +112,14 @@ function UserInterface(self) {
     self.btnTemp_PlusClick = function () {
         if (!self.OvenIsOn()) return;
 
-        self.Temp_UpClickFunction()();
+        self.Temp_PlusClickFunction()();
     };
 
+    //Timer Plus/Minus
     self.btnTimer_MinusClick = function () {
         if (!self.OvenIsOn()) return;
 
-        self.Timer_DownClickFunction()();
+        self.Timer_MinusClickFunction()();
     };
 
     self.btnTimer_PlusClick = function () {

@@ -64,10 +64,13 @@ function OvenViewModel() {
         self.TimeDilation(newValue);
     };
 
-    self.Log = function(entry) {
-        console.log(entry);
-    };
+    self.LogFunction = console.log;
 
+    self.Log = function (entry) {
+        if (self.LogFunction !== null)
+            self.LogFunction(entry);
+    };
+    
     //Set defaults
     self.SetDefaults();
 

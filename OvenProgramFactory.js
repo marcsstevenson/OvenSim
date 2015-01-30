@@ -19,11 +19,7 @@ function OvenProgramFactory() {
     self.BuildEmptyOvenProgram = function (index) {
         var ovenProgram = new OvenProgram();
 
-        var name = 'P';
-        if (index <= 9) name += '0';
-        name += index + 1;
-
-        ovenProgram.Name(name);
+        ovenProgram.Name(index + 1);
         ovenProgram.Index(index);
 
         //Default to 3 steps for now
@@ -36,12 +32,8 @@ function OvenProgramFactory() {
 
     self.BuildEmptyOvenProgramStep = function (index) {
         var ovenProgramStep = new OvenProgramStep();
-
-        var ovenProgramStepName = '';
-        if (index <= 9) ovenProgramStepName += '0';
-        ovenProgramStepName += index + 1;
-
-        ovenProgramStep.Name(ovenProgramStepName);
+        
+        ovenProgramStep.Name(index + 1);
         ovenProgramStep.Index(index);
 
         //TODO

@@ -39,10 +39,14 @@ function StatusProperties(self) {
     self.TimerComplete = ko.observable(false);
 
     //Programming
-    self.IsDisplayingPrograms = ko.observable(false);
-    self.IsEditingPrograms = ko.observable(false);
+    self.ProgrammingStage = ko.observable(0); //0 = Not, 1 = Display Program, 2 = Edit Program, 3 = Edit Program Stage Values
+    self.IsProgramming = ko.computed(function() {
+        return self.ProgrammingStage() > 0;
+    });
+
     self.OvenPrograms = ko.observableArray(new OvenProgramFactory().BuildEmptyOvenPrograms());
     self.DisplayingOvenProgramIndex = ko.observable(0);
+    self.DisplayingOvenProgramStepIndex = ko.observable(0);
     self.CookingOvenProgramIndex = ko.observable(0);
     self.CookingOvenProgramStepIndex = ko.observable(0);
 
@@ -69,8 +73,8 @@ function StatusProperties(self) {
     self.LightOn_TimerFunction = ko.observable();
 
     self.Temp_MinusClickFunction = ko.observable();
-    self.Temp_UpClickFunction = ko.observable();
-    self.Timer_DownClickFunction = ko.observable();
+    self.Temp_PlusClickFunction = ko.observable();
+    self.Timer_MinusClickFunction = ko.observable();
     self.Timer_UpClickFunction = ko.observable();
 
     //Display functions
@@ -109,7 +113,7 @@ function StatusProperties(self) {
         self.TempButtonUpFunction(self.ToggleTempDisplay);
         self.SetDefaults_TimerUi();
         self.Temp_MinusClickFunction(self.DecreaseTargetTemperature);
-        self.Temp_UpClickFunction(self.IncreaseTargetTemperature);
+        self.Temp_PlusClickFunction(self.IncreaseTargetTemperature);
         
         //Display functions
         self.TopDisplayFunction(self.TargetTemperature);
@@ -145,15 +149,16 @@ function StatusProperties(self) {
         self.TimerButtonDownFunction(self.TimerDown);
         self.TimerButtonUpFunction(self.TimerUp);
         self.LightOn_TimerFunction(self.TimerRunning);
-        self.Timer_DownClickFunction(self.DecreaseTimer);
+        self.Timer_MinusClickFunction(self.DecreaseTimer);
         self.Timer_UpClickFunction(self.IncreaseTimer);
     };
 
     self.SetDefaults_Programming = function () {
-        self.IsDisplayingPrograms(false);
-        self.IsEditingPrograms(false);
+        self.ProgrammingStage(0);
+        
         //The programs persist
         self.DisplayingOvenProgramIndex(0);
+        self.DisplayingOvenProgramStepIndex(0);
         self.CookingOvenProgramIndex(0);
         self.CookingOvenProgramStepIndex(0);
     };

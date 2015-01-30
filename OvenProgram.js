@@ -7,6 +7,14 @@ function OvenProgram() {
     self.Index = ko.observable();
     self.OvenProgramSteps = ko.observableArray();
 
+    self.GetPName = function() {
+        var pName = 'P';
+        if (self.Index() < 10) pName += '0';
+        pName += self.Name();
+
+        return pName;
+    };
+
     self.AddOvenProgramStep = function (ovenProgramStep) {
         self.OvenProgramSteps.push(ovenProgramStep);
     };
