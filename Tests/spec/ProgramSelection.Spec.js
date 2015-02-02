@@ -23,7 +23,6 @@ describe("ProgramSelection", function () {
         });
 
         describe("On Temp_PlusClick", function () {
-
             beforeEach(function () {
                 ovenViewModel.btnTemp_PlusClick();
             });
@@ -42,6 +41,18 @@ describe("ProgramSelection", function () {
                 it("the top display shall be 2.1", function () {
                     var topDisplay = ovenViewModel.TopDisplay();
                     expect(topDisplay).toEqual('2.1');
+                });
+
+                describe("On ProgrammingLongClick", function () {
+
+                    beforeEach(function () {
+                        ovenViewModel.ProgrammingLongClick();
+                    });
+
+                    it("the top display shall be P02", function () {
+                        var topDisplay = ovenViewModel.TopDisplay();
+                        expect(topDisplay).toEqual('P02');
+                    });
                 });
             });
         });
