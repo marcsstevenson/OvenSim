@@ -14,8 +14,8 @@ function Subscriptions(self) {
         self.Log("MoistureModeOn: " + self.MoistureModeOn());
     });
 
-    self.CurrentMoistureMode.subscribe(function () {
-        self.Log("CurrentMoistureMode: " + self.CurrentMoistureMode());
+    self.DisplayingProgramStep().CurrentMoistureMode.subscribe(function () {
+        self.Log("CurrentMoistureMode: " + self.DisplayingProgramStep().CurrentMoistureMode());
     });
 
     self.DisplayingMoistureSetup.subscribe(function () {

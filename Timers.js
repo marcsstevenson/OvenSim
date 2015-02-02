@@ -329,5 +329,25 @@ function Timers(self) {
         self.ProgrammingLongClick();
     };
 
+    //Programming Flash
+    self.ProgrammingFlashTimerId = 12;
+    self.ProgrammingFlashInterval = 200; //ms
+
+    self.ClearProgrammingFlashTimer = function () {
+        if (self.ProgrammingFlashTimerId !== 12)
+            clearInterval(self.ProgrammingFlashTimerId);
+
+        self.StopProgrammingFlash();
+    };
+
+    self.StartProgrammingFlashIntervalTimer = function () {
+        self.ClearProgrammingFlashTimer(); //Stop the timer
+        self.ProgrammingFlashTimerId = setInterval(function () { self.NextProgrammingFlashInterval(); }, self.ProgrammingFlashInterval);
+    };
+
+    self.NextProgrammingFlashInterval = function () {
+        self.ToggleProgrammingFlash();
+    };
+
     //*** Programming - End
 }

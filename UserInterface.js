@@ -35,7 +35,13 @@ function UserInterface(self) {
     };
 
     self.LightOn_Program = ko.computed(function () {
-        return self.IsProgramming();
+        if (self.IsProgramming()) {
+            if (self.ProgrammingStage() >= 2)
+                return self.ProgrammingFlash();
+            else
+                return true;
+        } else
+            return false;
     });
 
     //Temp
@@ -73,11 +79,11 @@ function UserInterface(self) {
     self.ButtonClickFan = function () {
         if (!self.OvenIsOn()) return;
 
-        self.FanFunction();
+        self.DisplayingProgramStep().ToggleFanValue();
     };
 
     self.LightOn_Fan = ko.computed(function () {
-        return self.IsFanLow();
+        return self.DisplayingProgramStep().IsFanLow();
     });
 
     //Timer
@@ -150,12 +156,16 @@ function UserInterface(self) {
     });
 
     self.MoistureModeDisplay = ko.computed(function () {
-        return self.MoistureModeBlinkOn() === true ? 'H-' + self.CurrentMoistureMode() : '';
+        return self.MoistureModeBlinkOn() === true ? 'H-' + self.DisplayingProgramStep().CurrentMoistureMode() : '';
     });
 
     //Computed - End
 
     //Display Functions - Start
+
+    self.TargetTemperature = ko.computed(function () {
+        return self.DisplayingProgramStep().TargetTemperature();
+    });
 
     self.TimerDisplayValue = function () {
         if (self.TimerStarted()) {
@@ -164,12 +174,12 @@ function UserInterface(self) {
             else
                 return '';
         } else {
-            if (self.TimerStartValue() <= -1) {
+            if (self.DisplayingProgramStep().TimerStartValue() <= -1) {
                 return "InF";
-            } else if (self.TimerStartValue() === 0) {
+            } else if (self.DisplayingProgramStep().TimerStartValue() === 0) {
                 return "---";
             } else {
-                return self.TimerStartValue();
+                return self.DisplayingProgramStep().TimerStartValue();
             }
         }
     };
@@ -179,12 +189,12 @@ function UserInterface(self) {
 
         if (self.TargetCoreTemperatureSet()) {
             if (self.TargetCoreTemperatureBlinkOn()) {
-                
+
                 if (self.TargetCoreTemperatureAlternate()) {
                     if (self.DisplayingActualCoreTemperature())
-                        return self.ActualCoreTemperature();
+                        return self.DisplayingProgramStep().ActualCoreTemperature();
                     else
-                        return self.TargetCoreTemperature();
+                        return self.DisplayingProgramStep().TargetCoreTemperature();
                 } else {
                     return coreProbeLabel;
                 }
@@ -195,7 +205,7 @@ function UserInterface(self) {
             return coreProbeLabel;
         }
     };
-
+    
     //Display Functions - End
 
     //Utils
