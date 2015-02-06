@@ -1,6 +1,6 @@
 /// <reference path="Lib/knockout-3.1.0.js" />
 /// <reference path="OvenProgram.js" />
-/// <reference path="OvenProgramStep.js" />
+/// <reference path="OvenProgramStage.js" />
 
 function OvenProgramFactory() {
     var self = this;
@@ -24,24 +24,24 @@ function OvenProgramFactory() {
 
         //Default to 3 steps for now
         for (var i = 0; i < 3; i++) {
-            ovenProgram.AddOvenProgramStep(self.BuildEmptyOvenProgramStep(i));
+            ovenProgram.AddOvenProgramStage(self.BuildEmptyOvenProgramStage(i));
         }
 
         return ovenProgram;
     };
 
-    self.BuildEmptyOvenProgramStep = function (index) {
-        var ovenProgramStep = new OvenProgramStep();
+    self.BuildEmptyOvenProgramStage = function (index) {
+        var ovenProgramStage = new OvenProgramStage(false);
         
-        ovenProgramStep.Name(index + 1);
-        ovenProgramStep.Index(index);
+        ovenProgramStage.Name(index + 1);
+        ovenProgramStage.Index(index);
 
         //TODO
-        ovenProgramStep.Temperature = ko.observable();
-        ovenProgramStep.DurationSeconds = ko.observable();
-        ovenProgramStep.MoistureMode = ko.observable(); //1-5
+        ovenProgramStage.Temperature = ko.observable();
+        ovenProgramStage.DurationSeconds = ko.observable();
+        ovenProgramStage.MoistureMode = ko.observable(); //1-5
 
-        return ovenProgramStep;
+        return ovenProgramStage;
     };
 
     return self;

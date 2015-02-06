@@ -5,8 +5,11 @@
 /// <reference path="Subscriptions.js" />
 /// <reference path="OvenManager.js" />
 
-function OvenViewModel() {
+function OvenViewModel(soundEnabled, blinkingEnabled) {
     var self = this;
+
+    self.SoundEnabled = soundEnabled;
+    self.BlinkingEnabled = blinkingEnabled;
 
     //Expand from external files
     Timers(self);

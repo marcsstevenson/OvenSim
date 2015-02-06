@@ -15,10 +15,12 @@ function UserInterface(self) {
     };
 
     self.LightOn_Steam = ko.computed(function () {
-        if (self.OvenIsOn()) {
-            return self.MoistureModeOn() || self.DisplayingMoistureSetup() || self.SteamShooting();
-        } else
-            return false;
+        if (!self.OvenIsOn()) return false; //The oven is off
+
+        if (self.SteamButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
+        return self.MoistureModeOn() || self.DisplayingMoistureSetup() || self.SteamShooting();
     });
 
     //Program
@@ -35,12 +37,14 @@ function UserInterface(self) {
     };
 
     self.LightOn_Program = ko.computed(function () {
-        if (self.IsProgramming()) {
-            if (self.ProgrammingStage() >= 2)
-                return self.ProgrammingFlash();
-            else
-                return true;
-        } else
+        if (!self.OvenIsOn()) return false; //The oven is off
+
+        if (self.ProgramButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
+        if (self.ProgrammingArea() >= 1)
+            return true;
+        else
             return false;
     });
 
@@ -52,14 +56,16 @@ function UserInterface(self) {
     };
 
     self.LightOn_Temp = ko.computed(function () {
-        if (self.OvenIsOn()) {
-            if (self.DisplayingActualTemperature()) {
-                return self.DisplayingActualFlash();
-            } else {
-                return self.IsHeating();
-            }
-        } else
-            return false;
+        if (!self.OvenIsOn()) return false; //The oven is off
+        
+        if (self.TempButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
+        if (self.DisplayingActualTemperature()) {
+            return self.DisplayingActualTemperature();
+        } else {
+            return self.IsHeating();
+        }
     });
 
     //LightPower
@@ -72,6 +78,11 @@ function UserInterface(self) {
     };
 
     self.LightOn_LightPower = ko.computed(function () {
+        if (!self.OvenIsOn()) return false; //The oven is off
+
+        if (self.LightPowerButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
         return self.LightIsOn();
     });
 
@@ -79,27 +90,37 @@ function UserInterface(self) {
     self.ButtonClickFan = function () {
         if (!self.OvenIsOn()) return;
 
-        self.DisplayingProgramStep().ToggleFanValue();
+        self.DisplayingProgramStage().ToggleFanValue();
     };
 
     self.LightOn_Fan = ko.computed(function () {
-        return self.DisplayingProgramStep().IsFanLow();
+        if (!self.OvenIsOn() || self.IsProgramming()) return false; //The oven is off
+
+        if (self.FanButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
+        return self.DisplayingProgramStage().IsFanLow();
     });
 
     //Timer
     self.TimerButtonDown = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.TimerButtonDownFunction()) return;
 
         self.TimerButtonDownFunction()();
     };
-    
+
     self.TimerButtonUp = function () {
-        if (!self.OvenIsOn()) return;
-        
+        if (!self.OvenIsOn() || !self.TimerButtonUpFunction()) return;
+
         self.TimerButtonUpFunction()();
     };
 
     self.LightOn_Timer = ko.computed(function () {
+        if (!self.OvenIsOn()) return false; //The oven is off
+
+        if (self.TimerButtonIsBlinking() && !self.MasterBlinkOn())
+            return false; //The blink is off
+
         if (self.LightOn_TimerFunction())
             return self.LightOn_TimerFunction()();
         else
@@ -110,28 +131,28 @@ function UserInterface(self) {
     //Temp Plus/Minus
 
     self.btnTemp_MinusClick = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.Temp_MinusClickFunction()) return;
 
         self.Temp_MinusClickFunction()();
     };
 
     self.btnTemp_PlusClick = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.Temp_PlusClickFunction()) return;
 
         self.Temp_PlusClickFunction()();
     };
 
     //Timer Plus/Minus
     self.btnTimer_MinusClick = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.Timer_MinusClickFunction()) return;
 
         self.Timer_MinusClickFunction()();
     };
 
     self.btnTimer_PlusClick = function () {
-        if (!self.OvenIsOn()) return;
+        if (!self.OvenIsOn() || !self.Timer_PlusClickFunction()) return;
 
-        self.Timer_UpClickFunction()();
+        self.Timer_PlusClickFunction()();
     };
 
     //Dials - End
@@ -139,24 +160,30 @@ function UserInterface(self) {
     //Displays - Start
 
     self.TopDisplay = ko.computed(function () {
+        if (self.TopDisplayIsBlinking() && !self.MasterBlinkOn() && self.OvenIsOn())
+            return ''; //The oven or the blink is off
+        
         return self.TopDisplayFunction() ? self.TopDisplayFunction()() : '';
     });
 
     self.BottomDisplay = ko.computed(function () {
+        if (self.BottomDisplayIsBlinking() && !self.MasterBlinkOn() && self.OvenIsOn())
+            return ''; //The oven or the blink is off
+
         return self.BottomDisplayFunction() ? self.BottomDisplayFunction()() : '';
     });
 
     //Displays - End
 
     //Computed - Start
-    
+
     self.ActualTemperatureRounded = ko.computed(function () {
         //Round the value
         return Math.round(self.ActualTemperature());
     });
 
     self.MoistureModeDisplay = ko.computed(function () {
-        return self.MoistureModeBlinkOn() === true ? 'H-' + self.DisplayingProgramStep().CurrentMoistureMode() : '';
+        return 'H-' + self.DisplayingProgramStage().CurrentMoistureMode();
     });
 
     //Computed - End
@@ -164,24 +191,27 @@ function UserInterface(self) {
     //Display Functions - Start
 
     self.TargetTemperature = ko.computed(function () {
-        return self.DisplayingProgramStep().TargetTemperature();
+        return self.DisplayingProgramStage().TargetTemperature();
     });
 
     self.TimerDisplayValue = function () {
         if (self.TimerStarted()) {
-            if (self.TimerBlinkOn())
-                return self.ConvertDurtaionToDisplay(self.TimerCurrentValue());
-            else
-                return '';
+            return self.ConvertDurtaionToDisplay(self.TimerCurrentValue());
         } else {
-            if (self.DisplayingProgramStep().TimerStartValue() <= -1) {
+            if (self.DisplayingProgramStage().TimerStartValue() <= -2) {
+                return "CP";
+            } else if (self.DisplayingProgramStage().TimerStartValue() === -1) {
                 return "InF";
-            } else if (self.DisplayingProgramStep().TimerStartValue() === 0) {
+            } else if (self.DisplayingProgramStage().TimerStartValue() === 0) {
                 return "---";
             } else {
-                return self.DisplayingProgramStep().TimerStartValue();
+                return self.DisplayingProgramStage().TimerStartValue();
             }
         }
+    };
+
+    self.TargetTemperatureDisplayValue = function () {
+        return self.DisplayingProgramStage().TargetTemperature();
     };
 
     self.CoreProbeDisplayValue = function () {
@@ -192,9 +222,9 @@ function UserInterface(self) {
 
                 if (self.TargetCoreTemperatureAlternate()) {
                     if (self.DisplayingActualCoreTemperature())
-                        return self.DisplayingProgramStep().ActualCoreTemperature();
+                        return self.DisplayingProgramStage().ActualCoreTemperature();
                     else
-                        return self.DisplayingProgramStep().TargetCoreTemperature();
+                        return self.DisplayingProgramStage().TargetCoreTemperature();
                 } else {
                     return coreProbeLabel;
                 }
@@ -205,7 +235,7 @@ function UserInterface(self) {
             return coreProbeLabel;
         }
     };
-    
+
     //Display Functions - End
 
     //Utils

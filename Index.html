@@ -14,19 +14,29 @@
     <script src="OvenManager.js"></script>
     <script src="OvenProgramFactory.js"></script>
     <script src="OvenProgram.js"></script>
-    <script src="OvenProgramStep.js"></script>
+    <script src="OvenProgramStage.js"></script>
 
     <script>
         $(document).ready(function () {
-            var viewModel = new OvenViewModel();
+            var viewModel = new OvenViewModel(true, true);
             ko.applyBindings(viewModel);
 
             //Testing
             viewModel.TurnOvenOn();
-            //console.clear();
 
             //viewModel.ConnectCoreProbe();
             //viewModel.IncreaseTargetCoreTemperature();
+
+            //Testing
+            viewModel.ProgrammingShortClick();
+            //viewModel.ProgrammingShortClick();
+
+            viewModel.ProgrammingLongClick();
+            //viewModel.ProgrammingShortClick();
+            //viewModel.ProgrammingShortClick();
+            //viewModel.ProgrammingShortClick();
+            //viewModel.ProgrammingShortClick();
+            //viewModel.ProgrammingShortClick();
         });
     </script>
     <title>Moffat Oven Simulator</title>

@@ -88,63 +88,17 @@ function Timers(self) {
     self.ClearTempDisplayTimer = function () {
         if (self.TempDisplayTimerId !== 3)
             clearInterval(self.TempDisplayTimerId);
-
-        //Stop the flashing also
-        self.ClearTempFlashTimer();
     };
 
     self.StartTempDisplayIntervalTimer = function () {
         self.ClearTempDisplayTimer(); //Stop the timer
         self.TempDisplayTimerId = setInterval(function () { self.NextTempDisplayInterval(); }, self.TempDisplayInterval);
-
-        //Commence flashing
-        self.StartTempFlashIntervalTimer();
     };
 
     self.NextTempDisplayInterval = function () {
         self.IsWaitingForTempDisplayInterval = false; //Always reset this
-        self.ClearTempDisplayTimer(); //Stop the timer
+        
         self.StopDisplayingActualTemperature(); //TempDisplay off the oven
-    };
-
-    //TempFlash
-
-    self.TempFlashTimerId = 4;
-    self.TempFlashInterval = 200; //ms
-
-    self.ClearTempFlashTimer = function () {
-        if (self.TempFlashTimerId !== 4)
-            clearInterval(self.TempFlashTimerId);
-
-        self.StopDisplayingActualFlash();
-    };
-
-    self.StartTempFlashIntervalTimer = function () {
-        self.ClearTempFlashTimer(); //Stop the timer
-        self.TempFlashTimerId = setInterval(function () { self.NextTempFlashInterval(); }, self.TempFlashInterval);
-    };
-
-    self.NextTempFlashInterval = function () {
-        self.ToggleDisplayingActualFlash();
-    };
-
-    //MoistureModeBlink
-
-    self.MoistureModeBlinkTimerId = 5;
-    self.MoistureModeBlinkOffInterval = blinkInterval; //ms - this is used to turn the oven off
-
-    self.ClearMoistureModeBlinkTimer = function () {
-        if (self.MoistureModeBlinkTimerId !== 5)
-            clearInterval(self.MoistureModeBlinkTimerId);
-    };
-
-    self.StartMoistureModeBlinkIntervalTimer = function () {
-        self.ClearMoistureModeBlinkTimer(); //Stop the timer
-        self.MoistureModeBlinkTimerId = setInterval(function () { self.NextMoistureModeBlinkInterval(); }, self.MoistureModeBlinkOffInterval);
-    };
-
-    self.NextMoistureModeBlinkInterval = function () {
-        self.MoistureModeBlinkOn(!self.MoistureModeBlinkOn());
     };
 
     //***TempDisplay - End
@@ -202,26 +156,7 @@ function Timers(self) {
 
         self.SetTimerTimerNextValue();
     };
-
-    //TimerBlink
-
-    self.TimerBlinkTimerId = 8;
-    self.TimerBlinkOffInterval = blinkInterval; //ms - this is used to turn the oven off
-
-    self.ClearTimerBlinkTimer = function () {
-        if (self.TimerBlinkTimerId !== 8)
-            clearInterval(self.TimerBlinkTimerId);
-    };
-
-    self.StartTimerBlinkIntervalTimer = function () {
-        self.ClearTimerBlinkTimer(); //Stop the timer
-        self.TimerBlinkTimerId = setInterval(function () { self.NextTimerBlinkInterval(); }, self.TimerBlinkOffInterval);
-    };
-
-    self.NextTimerBlinkInterval = function () {
-        self.TimerBlinkOn(!self.TimerBlinkOn());
-    };
-
+    
     //*** Timer - End
 
     //*** Status Values
@@ -254,7 +189,7 @@ function Timers(self) {
     };
 
     //*** Core Temperature - Start
-
+    /// KEEP THIS ------------------------------------------------------------------------
     var coreTemperatureModeBlinkCount = 0;
     self.CoreTemperatureModeBlinkTimerId = 9;
     self.CoreTemperatureModeBlinkOffInterval = blinkInterval;
@@ -328,26 +263,22 @@ function Timers(self) {
 
         self.ProgrammingLongClick();
     };
-
-    //Programming Flash
-    self.ProgrammingFlashTimerId = 12;
-    self.ProgrammingFlashInterval = 200; //ms
-
-    self.ClearProgrammingFlashTimer = function () {
-        if (self.ProgrammingFlashTimerId !== 12)
-            clearInterval(self.ProgrammingFlashTimerId);
-
-        self.StopProgrammingFlash();
-    };
-
-    self.StartProgrammingFlashIntervalTimer = function () {
-        self.ClearProgrammingFlashTimer(); //Stop the timer
-        self.ProgrammingFlashTimerId = setInterval(function () { self.NextProgrammingFlashInterval(); }, self.ProgrammingFlashInterval);
-    };
-
-    self.NextProgrammingFlashInterval = function () {
-        self.ToggleProgrammingFlash();
-    };
-
+    
     //*** Programming - End
+
+    //MasterBlink - the blink to blink them all
+
+    self.MasterBlinkTimerId = 100;
+    self.MasterBlinkOffInterval = blinkInterval; //ms - this is used to turn the oven off
+    
+    self.StartMasterBlinkIntervalTimer = function () {
+        self.MasterBlinkTimerId = setInterval(function () { self.NextMasterBlinkInterval(); }, self.MasterBlinkOffInterval);
+    };
+
+    self.NextMasterBlinkInterval = function () {
+        self.MasterBlinkOn(!self.MasterBlinkOn());
+    };
+
+    if (self.BlinkingEnabled === true)
+        self.StartMasterBlinkIntervalTimer(); //The master blink always blinks
 }

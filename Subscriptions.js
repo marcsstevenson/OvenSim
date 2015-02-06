@@ -14,8 +14,8 @@ function Subscriptions(self) {
         self.Log("MoistureModeOn: " + self.MoistureModeOn());
     });
 
-    self.DisplayingProgramStep().CurrentMoistureMode.subscribe(function () {
-        self.Log("CurrentMoistureMode: " + self.DisplayingProgramStep().CurrentMoistureMode());
+    self.DisplayingProgramStage().CurrentMoistureMode.subscribe(function () {
+        self.Log("CurrentMoistureMode: " + self.DisplayingProgramStage().CurrentMoistureMode());
     });
 
     self.DisplayingMoistureSetup.subscribe(function () {
@@ -40,5 +40,32 @@ function Subscriptions(self) {
 
     self.CoreTemperatureCookingStarted.subscribe(function () {
         self.Log("CoreTemperatureCookingStarted: " + self.CoreTemperatureCookingStarted());
+    });
+
+    //Blinkingness
+    self.SteamButtonIsBlinking.subscribe(function () {
+        self.Log("SteamButtonIsBlinking: " + self.SteamButtonIsBlinking());
+    });
+    self.ProgramButtonIsBlinking.subscribe(function () {
+        self.Log("ProgramButtonIsBlinking: " + self.ProgramButtonIsBlinking());
+    });
+    self.TempButtonIsBlinking.subscribe(function () {
+        self.Log("TempButtonIsBlinking: " + self.TempButtonIsBlinking());
+    });
+    self.LightPowerButtonIsBlinking.subscribe(function () {
+        self.Log("LightPowerButtonIsBlinking: " + self.LightPowerButtonIsBlinking());
+    });
+    self.FanButtonIsBlinking.subscribe(function () {
+        self.Log("FanButtonIsBlinking: " + self.FanButtonIsBlinking());
+    });
+    self.TimerButtonIsBlinking.subscribe(function () {
+        self.Log("TimerButtonIsBlinking: " + self.TimerButtonIsBlinking());
+    });
+
+    self.TopDisplayIsBlinking.subscribe(function () {
+        self.Log("TopDisplayIsBlinking: " + self.TopDisplayIsBlinking());
+    });
+    self.BottomDisplayIsBlinking.subscribe(function () {
+        self.Log("BottomDisplayIsBlinking: " + self.BottomDisplayIsBlinking());
     });
 }
