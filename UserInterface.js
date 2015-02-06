@@ -160,14 +160,14 @@ function UserInterface(self) {
     //Displays - Start
 
     self.TopDisplay = ko.computed(function () {
-        if (self.TopDisplayIsBlinking() && !self.MasterBlinkOn() && self.OvenIsOn())
+        if (!self.OvenIsOn() || (self.TopDisplayIsBlinking() && !self.MasterBlinkOn()))
             return ''; //The oven or the blink is off
         
         return self.TopDisplayFunction() ? self.TopDisplayFunction()() : '';
     });
 
     self.BottomDisplay = ko.computed(function () {
-        if (self.BottomDisplayIsBlinking() && !self.MasterBlinkOn() && self.OvenIsOn())
+        if (!self.OvenIsOn() || (self.BottomDisplayIsBlinking() && !self.MasterBlinkOn() && !self.OvenIsOn()))
             return ''; //The oven or the blink is off
 
         return self.BottomDisplayFunction() ? self.BottomDisplayFunction()() : '';
