@@ -18,25 +18,22 @@
 
     <script>
         $(document).ready(function () {
-            var viewModel = new OvenViewModel(true, true);
-            ko.applyBindings(viewModel);
+            var ovenViewModel = new OvenViewModel(true, true);
+            ko.applyBindings(ovenViewModel);
 
             //Testing
-            viewModel.TurnOvenOn();
+            ovenViewModel.TurnOvenOn();
 
-            //viewModel.ConnectCoreProbe();
-            //viewModel.IncreaseTargetCoreTemperature();
+            //ovenViewModel.ConnectCoreProbe();
+            //ovenViewModel.IncreaseTargetCoreTemperature();
 
-            //Testing
-            viewModel.ProgrammingShortClick();
-            //viewModel.ProgrammingShortClick();
-
-            viewModel.ProgrammingLongClick();
-            //viewModel.ProgrammingShortClick();
-            //viewModel.ProgrammingShortClick();
-            //viewModel.ProgrammingShortClick();
-            //viewModel.ProgrammingShortClick();
-            //viewModel.ProgrammingShortClick();
+            //Setup all three stages of a program
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingLongClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTimer_MinusClick(); //Decrease the timer
+            ovenViewModel.btnTimer_MinusClick(); //Decrease the timer
         });
     </script>
     <title>Moffat Oven Simulator</title>

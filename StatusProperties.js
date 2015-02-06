@@ -26,6 +26,7 @@ function StatusProperties(self) {
     self.TargetCoreTemperature = ko.observable(0);
     self.TargetCoreTemperatureSet = ko.observable(false);
 
+    self.TargetCoreTemperatureBlinkOn = ko.observable(false);
     self.TargetCoreTemperatureAlternate = ko.observable(false);
     self.CoreTemperatureCookingStarted = ko.observable(false);
 

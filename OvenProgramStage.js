@@ -21,6 +21,7 @@ function OvenProgramStage(isManualModeStep) {
     self.IsFanLow = ko.observable();
     self.TargetTemperature = ko.observable(0);
     self.TargetCoreTemperature = ko.observable(0);
+    self.TargetCoreTemperatureSet = ko.observable(false);
     self.MoistureMode = ko.observable(); //1-5
 
     self.TimerStartValue = ko.observable(); //CP (-2), InF (-1), --- (0), 1-180
@@ -113,6 +114,36 @@ function OvenProgramStage(isManualModeStep) {
 
     //*** Temperature Setting - End
 
+    //*** Core Temperature SEtting - Start
+
+    self.DecreaseTargetCoreTemperature = function () {
+        self.SetTargetCoreTemperature(self.TargetCoreTemperature() - 1);
+        //self.IsHeating(true);
+    };
+
+    self.IncreaseTargetCoreTemperature = function () {
+        self.SetTargetCoreTemperature(self.TargetCoreTemperature() + 1);
+        //self.IsHeating(true);
+    };
+
+    self.SetTargetCoreTemperature = function (newValue) {
+        self.TargetCoreTemperatureSet(true); //The value has been changed
+        
+        if (newValue >= self.MaxTargetCoreTemperature) //Ensure that we do not go above our max target
+        {
+            self.TargetCoreTemperature(self.MaxTargetCoreTemperature);
+            return;
+        }
+        else if (newValue <= self.MinTargetCoreTemperature) //Ensure that we do not go below min target
+        {
+            self.TargetCoreTemperature(self.MinTargetCoreTemperature);
+            return;
+        }
+
+        self.TargetCoreTemperature(newValue);
+    };
+
+    //*** Core Temperature SEtting - End
 
     //*** Timer Section - Start
 

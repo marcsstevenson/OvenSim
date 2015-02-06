@@ -209,7 +209,7 @@ function UserInterface(self) {
             }
         }
     };
-
+    
     self.TargetTemperatureDisplayValue = function () {
         return self.DisplayingProgramStage().TargetTemperature();
     };
@@ -217,12 +217,11 @@ function UserInterface(self) {
     self.CoreProbeDisplayValue = function () {
         var coreProbeLabel = "CP";
 
-        if (self.TargetCoreTemperatureSet()) {
+        if (self.DisplayingProgramStage().TargetCoreTemperatureSet()) {
             if (self.TargetCoreTemperatureBlinkOn()) {
-
                 if (self.TargetCoreTemperatureAlternate()) {
                     if (self.DisplayingActualCoreTemperature())
-                        return self.DisplayingProgramStage().ActualCoreTemperature();
+                        return self.ActualCoreTemperature();
                     else
                         return self.DisplayingProgramStage().TargetCoreTemperature();
                 } else {

@@ -38,8 +38,7 @@ function OvenProgram() {
 
         ovenProgramStage.IsOnValue(true);
     };
-
-
+    
     self.GetLastOnProgramStage = function () {
         //Work down from the top of the list and return the first on stage
         for (var i = self.OvenProgramStages().length - 1; i >= 0; i--) {
@@ -50,11 +49,13 @@ function OvenProgram() {
         return null; //None are IsOn
     };
 
-    self.SetProgramStageOff = function () {
+    self.SetProgramStageOff = function (index) {
         //Get the last on program stage - only this stage can be turned off
         var lastOnProgramStage = self.GetLastOnProgramStage();
 
         if (!lastOnProgramStage) return; //None are IsOn
+
+        if (lastOnProgramStage.Index() != index) return; //Only the last can be turned off
 
         if (lastOnProgramStage.Index() === index) //Only turn off if the index argument is for the last on stage
             lastOnProgramStage.IsOnValue(false);

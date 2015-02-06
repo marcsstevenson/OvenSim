@@ -11,6 +11,56 @@ describe("ProgramSelection", function () {
         ovenViewModel.LogFunction = null;
         ovenViewModel.TurnOvenOn();
     });
+    
+    //Display Program
+    describe("When programming, only the last on program shall be able to be turned off", function () {
+        beforeEach(function () {
+            //Setup all three stages of a program
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingLongClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTimer_PlusClick(); //Increase the timer
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+            ovenViewModel.ProgrammingShortClick();
+        });
+
+        it("Trying to turn off stage 2 of 3 - the bottom display shall be On", function () {
+            //Go back to stage 2
+            ovenViewModel.btnTemp_MinusClick();
+            //Try to turn stage off
+            ovenViewModel.btnTimer_MinusClick();
+
+            var display = ovenViewModel.BottomDisplay();
+            expect(display).toEqual('On');
+        });
+
+        it("Trying to turn off stage 3 of 3 - the bottom display shall be OFF", function () {
+            //Try to turn stage off
+            ovenViewModel.btnTimer_MinusClick();
+
+            var display = ovenViewModel.BottomDisplay();
+            expect(display).toEqual('OFF');
+        });
+    });
 
     //Display Program
     describe("On ProgrammingShortClick", function () {
@@ -112,7 +162,7 @@ describe("ProgramSelection", function () {
                                 expect(String(topDisplay)).toEqual('On');
                             });
 
-                            describe("after Temp_MinusClick, clicking timer plus", function () {
+                            describe("after Temp_MinusClick", function () {
                                 beforeEach(function () {
                                     console.clear();
                                     ovenViewModel.btnTimer_MinusClick();
@@ -122,7 +172,7 @@ describe("ProgramSelection", function () {
 
                                 it("shall set the stage to OFF", function () {
                                     var topDisplay = ovenViewModel.BottomDisplay();
-                                    expect(String(topDisplay)).toEqual('On');
+                                    expect(String(topDisplay)).toEqual('OFF');
                                 });
                             });
                         });
