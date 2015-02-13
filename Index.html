@@ -8,7 +8,7 @@
     <script src="OvenViewModel.js"></script>
     <script src="StatusProperties.js"></script>
     <script src="UserInterface.js"></script>
-    
+
     <script src="Timers.js"></script>
     <script src="Subscriptions.js"></script>
     <script src="OvenManager.js"></script>
@@ -22,7 +22,11 @@
             ko.applyBindings(ovenViewModel);
 
             //Testing
-            //ovenViewModel.TurnOvenOn();
+            ovenViewModel.TurnOvenOn();
+
+            ovenViewModel.IncreaseTimer();
+            console.clear();
+            ovenViewModel.TimerButtonDown();
 
             //ovenViewModel.ConnectCoreProbe();
             //ovenViewModel.IncreaseTargetCoreTemperature();
@@ -58,6 +62,8 @@
         <div class="TempTopPadding SplitLeftMargin">
             <div class="btnTemp_Minus" data-bind="click: btnTemp_MinusClick"></div>
             <div class="btnTemp_Plus" data-bind="click: btnTemp_PlusClick"></div>
+
+            <div style="clear: both"></div>
         </div>
 
         <div class="BottomDisplayTopMargin">
@@ -81,7 +87,7 @@
         <button data-bind="click: ConnectCoreProbe, visible: !CoreProbeConnected()">Connect Core Probe</button>
         <button data-bind="click: DisconnectCoreProbe, visible: CoreProbeConnected">Disconnect Core Probe</button>
 
-        <h1 data-bind="text: ActualTemperature">Temperature</h1>
+        <h1 data-bind="text: Math.round(ActualTemperature() * 10) / 10">Temperature</h1>
 
         <span data-bind="text: '(x' + TimeDilation() + ')'"></span>
         <button class="btn" data-bind="click: DecreaseTimeDilation">slower</button>
@@ -89,7 +95,7 @@
 
         <label>Set Temperature</label>
         <input data-bind="value: TargetTemperature" type="number" style="width: 200px" />
-        
+
         <audio controls id="beepControl" preload="auto" style="display: none">
             <source src="Sounds/beep1.mp3" type="audio/mpeg">
         </audio>

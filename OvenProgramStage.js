@@ -89,7 +89,6 @@ function OvenProgramStage(isManualModeStep) {
     };
 
     self.IncreaseTargetTemperature = function () {
-        console.log('here');
         self.SetTargetTemperature(self.TargetTemperature() + 10);
     };
 

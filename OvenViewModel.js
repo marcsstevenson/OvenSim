@@ -32,14 +32,7 @@ function OvenViewModel(soundEnabled, blinkingEnabled) {
         self.SetDefaults();
         self.TopDisplayFunction(null);
     }
-
-    self.TimerStart = function () {
-        self.StartIntervalTimer();
-    }
-
-    self.TimerStop = function () {
-    }
-
+    
     //Time Dilation - Start
 
     self.IncreaseTimeDilation = function () {

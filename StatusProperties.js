@@ -30,8 +30,8 @@ function StatusProperties(self) {
     self.TargetCoreTemperatureAlternate = ko.observable(false);
     self.CoreTemperatureCookingStarted = ko.observable(false);
 
-    self.TimerStartValue = ko.observable(0); //moment.duration
-    self.TimerCurrentValue = ko.observable(0); //moment.duration
+    //self.TimerStartValue = ko.observable(0); //moment.duration
+    //self.TimerCurrentValue = ko.observable(0); //moment.duration
     self.TimerDirectionUp = ko.observable(true);
     self.TimerStarted = ko.observable(false);
     self.TimerRunning = ko.observable(false);
@@ -162,7 +162,7 @@ function StatusProperties(self) {
         self.BottomDisplayFunction(self.TimerDisplayValue);
         self.TimerButtonDownFunction(self.TimerDown);
         self.TimerButtonUpFunction(self.TimerUp);
-        self.LightOn_TimerFunction(self.TimerRunning);
+        self.LightOn_TimerFunction(self.TimerStarted);
         self.Timer_MinusClickFunction(self.DecreaseTimer);
         self.Timer_PlusClickFunction(self.IncreaseTimer);
     };

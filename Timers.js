@@ -107,24 +107,31 @@ function Timers(self) {
 
     //Reset
 
-    self.TimerResetTimerId = 6;
-    self.IsWaitingForTimerResetInterval = ko.observable(false);
-    self.TimerResetInterval = 3000; //ms
+    self.TimerLongClickTimerId = 6;
+    self.IsWaitingForTimerLongClickInterval = ko.observable(false);
+    self.TimerLongClickInterval = 3000; //ms
 
-    self.ClearTimerResetTimer = function () {
-        if (self.TimerResetTimerId !== 6)
-            clearInterval(self.TimerResetTimerId);
+    self.ClearTimerLongClickTimer = function () {
+        if (self.TimerLongClickTimerId !== 6)
+            clearInterval(self.TimerLongClickTimerId);
     };
 
-    self.StartTimerResetIntervalTimer = function () {
-        self.ClearTimerResetTimer(); //Stop the timer
-        self.TimerResetTimerId = setInterval(function () { self.NextTimerResetInterval(); }, self.TimerResetInterval);
+    self.StartTimerLongClickIntervalTimer = function () {
+        if (self.IsWaitingForTimerLongClickInterval()) return; //Don't start another
+
+        self.IsWaitingForTimerLongClickInterval(true);
+        self.ClearTimerLongClickTimer(); //Stop the timer
+        self.TimerLongClickTimerId = setInterval(function () { self.NextTimerLongClickInterval(); }, self.TimerLongClickInterval);
     };
     
-    self.NextTimerResetInterval = function () {
-        self.IsWaitingForTimerCountdownInterval(false); //Always reset this
-        self.ClearTimerResetTimer(); //Stop the timer
-        self.ResetTimer();
+    self.NextTimerLongClickInterval = function () {
+        self.ClearTimerLongClickTimer();
+        //self.TimerLongClickInterval();
+        self.TimerLongClick();
+
+        //self.IsWaitingForTimerCountdownInterval(false); //Always reset this
+        //self.ClearTimerLongClickTimer(); //Stop the timer
+        //self.LongClickTimer();
     };
 
     //Countdown

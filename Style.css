@@ -81,7 +81,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  display: inline-block;
+  float: left;
 }
 .btnTemp_Minus {
   width: 81px;
@@ -89,7 +89,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  display: inline-block;
+  float: left;
   background-image: url('Images/btnTemp_Minus.png');
 }
 .btnTemp_Plus {
@@ -98,7 +98,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  display: inline-block;
+  float: left;
   background-image: url('Images/btnTemp_Plus.png');
 }
 .btnTimer_Minus {
@@ -107,7 +107,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  display: inline-block;
+  float: left;
   background-image: url('Images/btnTimer_Minus.png');
 }
 .btnTimer_Plus {
@@ -116,7 +116,7 @@
   cursor: pointer;
   border: none;
   padding: 0;
-  display: inline-block;
+  float: left;
   background-image: url('Images/btnTimer_Plus.png');
 }
 /*Layout*/
@@ -139,7 +139,7 @@
   padding-top: 6px;
 }
 .SplitLeftMargin {
-  margin-left: 65px;
+  margin-left: 66px;
 }
 .BottomDisplayTopMargin {
   margin-top: 208px;

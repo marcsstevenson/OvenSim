@@ -121,8 +121,10 @@ function UserInterface(self) {
         if (self.TimerButtonIsBlinking() && !self.MasterBlinkOn())
             return false; //The blink is off
 
-        if (self.LightOn_TimerFunction())
+        if (self.LightOn_TimerFunction()) {
             return self.LightOn_TimerFunction()();
+            
+        }
         else
             return false;
     });
@@ -196,7 +198,7 @@ function UserInterface(self) {
 
     self.TimerDisplayValue = function () {
         if (self.TimerStarted()) {
-            return self.ConvertDurtaionToDisplay(self.TimerCurrentValue());
+            return self.ConvertDurtaionToDisplay(self.DisplayingProgramStage().TimerCurrentValue());
         } else {
             if (self.DisplayingProgramStage().TimerStartValue() <= -2) {
                 return "CP";
