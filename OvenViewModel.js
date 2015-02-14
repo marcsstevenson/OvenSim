@@ -63,8 +63,8 @@ function OvenViewModel(soundEnabled, blinkingEnabled) {
     self.LogFunction = console.log;
 
     self.Log = function (entry) {
-        if (self.LogFunction !== null)
-            self.LogFunction(entry);
+        //if (self.LogFunction !== null)
+        //    self.LogFunction(entry);
     };
     
     //Set defaults
