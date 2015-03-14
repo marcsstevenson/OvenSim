@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+
     <script src="Lib/knockout-3.1.0.js"></script>
     <script src="Lib/jquery-2.1.1.min.js"></script>
     <script src="Lib/moment-2.8.4.min.js"></script>
@@ -15,14 +18,20 @@
     <script src="OvenProgramFactory.js"></script>
     <script src="OvenProgram.js"></script>
     <script src="OvenProgramStage.js"></script>
+    <script src="OvenScripts.js"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var ovenViewModel = new OvenViewModel(true, true);
             ko.applyBindings(ovenViewModel);
 
-            //Testing
             ovenViewModel.TurnOvenOn();
+
+            //new OvenScripts().SetProgram1_1TempToCP(ovenViewModel);
+            OvenScripts.SetProgram1To150DegreesAnd5MinutesThenBackToHome(ovenViewModel);
+            OvenScripts.DisplayProgram1AndSetActualTemperatureToReady(ovenViewModel);
+            OvenScripts.StopAlarm(ovenViewModel);
+            //Testing
 
             //ovenViewModel.IncreaseTimer();
             //console.clear();
@@ -33,12 +42,7 @@
             //ovenViewModel.IncreaseTargetCoreTemperature();
 
 
-            //ovenViewModel.ProgrammingShortClick();
-            //ovenViewModel.ProgrammingLongClick();
-            //ovenViewModel.ProgrammingShortClick();
-            //ovenViewModel.ProgrammingShortClick();
-            //ovenViewModel.btnTimer_MinusClick(); //Decrease the timer
-            //ovenViewModel.btnTimer_MinusClick(); //Decrease the timer
+
         });
     </script>
     <title>Moffat Oven Simulator</title>

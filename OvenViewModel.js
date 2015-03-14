@@ -60,11 +60,12 @@ function OvenViewModel(soundEnabled, blinkingEnabled) {
         self.TimeDilation(newValue);
     };
 
-    self.LogFunction = console.log;
+    self.LogFunction = console.log; //null;
 
     self.Log = function (entry) {
-        //if (self.LogFunction !== null)
-        //    self.LogFunction(entry);
+        if (self.LogFunction !== null)
+            self.LogFunction(entry);
+        //console.log(entry);
     };
     
     //Set defaults

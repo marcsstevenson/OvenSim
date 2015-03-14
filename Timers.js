@@ -187,12 +187,9 @@ function Timers(self) {
     };
 
     self.NextHeatingInterval = function () {
-        var delta = self.OvenIsOn() ? 0.1 : -0.05;
-
-        //Cater to time dilation
-        delta = delta * self.TimeDilation();
-
-        self.SetTemperature(self.ActualTemperature() + delta);
+        //TODO: Cooling when not heating
+        self.IncreaseTemperatureFromHeating();
+        self.IncreaseCoreTemperatureFromHeating();
     };
 
     //*** Core Temperature - Start

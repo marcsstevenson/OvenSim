@@ -187,6 +187,24 @@ function UserInterface(self) {
     self.MoistureModeDisplay = ko.computed(function () {
         return 'H-' + self.DisplayingProgramStage().CurrentMoistureMode();
     });
+    
+    self.AtTargetTemperature = ko.computed(function () {
+        //If the actual temperature is the same as the target temperature
+        var atTargetTemperature = self.ActualTemperature() >= self.DisplayingProgramStage().TargetTemperature();
+
+        if (atTargetTemperature) self.Log("At target temperature");
+
+        return atTargetTemperature;
+    });
+
+    self.AtTargetCoreTemperature = ko.computed(function () {
+        //If the actual temperature is the same as the target core temperature
+        var atTargetCoreTemperature = self.ActualCoreTemperature() >= self.DisplayingProgramStage().TargetCoreTemperature();
+
+        if (atTargetCoreTemperature) self.Log("At target core temperature");
+
+        return atTargetCoreTemperature;
+    });
 
     //Computed - End
 
@@ -247,9 +265,5 @@ function UserInterface(self) {
         //console.log(duration.minutes + ':' + (duration.seconds < 10 ? '0' : '') + duration.seconds);
 
         return duration.minutes() + ':' + (duration.seconds() < 10 ? '0' : '') + duration.seconds();
-    };
-
-    self.Log = function (message) {
-        self.Log(message);
     };
 }
