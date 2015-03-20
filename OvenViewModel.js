@@ -4,6 +4,10 @@
 /// <reference path="UserInterface.js" />
 /// <reference path="Subscriptions.js" />
 /// <reference path="OvenManager.js" />
+/// <reference path="TemperatureManagement.js" />
+/// <reference path="SoundManagement.js" />
+/// <reference path="TimerManagement.js" />
+/// <reference path="OvenProgramManagement.js" />
 
 function OvenViewModel(soundEnabled, blinkingEnabled) {
     var self = this;
@@ -15,6 +19,11 @@ function OvenViewModel(soundEnabled, blinkingEnabled) {
     Timers(self);
     StatusProperties(self);
     OvenManager(self);
+    TemperatureManagement(self);
+    SoundManagement(self);
+    TimerManagement(self);
+    OvenProgramManagement(self);
+
     UserInterface(self);
     Subscriptions(self);
 

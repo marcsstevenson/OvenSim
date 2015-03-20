@@ -42,6 +42,10 @@ function Subscriptions(self) {
         self.Log("CoreTemperatureCookingStarted: " + self.CoreTemperatureCookingStarted());
     });
 
+    self.IsPreheating.subscribe(function () {
+        self.Log("IsPreheating: " + self.IsPreheating());
+    });
+    
     //Blinkingness
     self.SteamButtonIsBlinking.subscribe(function () {
         self.Log("SteamButtonIsBlinking: " + self.SteamButtonIsBlinking());

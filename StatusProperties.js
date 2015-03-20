@@ -145,6 +145,12 @@ function StatusProperties(self) {
 
         //Manual Program Step
         self.ManualModeProgramStage().SetDefaults();
+        
+        //Display the manual stage
+        self.DisplayingProgramStage(self.ManualModeProgramStage());
+
+        //Stop any alarm
+        self.StopAlarm();
     };
 
     self.SetDefaults_Timer = function () {
@@ -162,11 +168,16 @@ function StatusProperties(self) {
 
     self.SetDefaults_TimerUi = function () {
         self.BottomDisplayFunction(self.TimerDisplayValue);
-        self.TimerButtonDownFunction(self.TimerDown);
-        self.TimerButtonUpFunction(self.TimerUp);
         self.LightOn_TimerFunction(self.TimerStarted);
         self.Timer_MinusClickFunction(self.DecreaseTimer);
         self.Timer_PlusClickFunction(self.IncreaseTimer);
+
+        self.SetDefaults_TimerButtons();
+    };
+
+    self.SetDefaults_TimerButtons = function () {
+        self.TimerButtonDownFunction(self.TimerDown);
+        self.TimerButtonUpFunction(self.TimerUp);
     };
 
     self.SetDefaults_Programming = function () {

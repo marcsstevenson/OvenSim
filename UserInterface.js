@@ -188,24 +188,6 @@ function UserInterface(self) {
         return 'H-' + self.DisplayingProgramStage().CurrentMoistureMode();
     });
     
-    self.AtTargetTemperature = ko.computed(function () {
-        //If the actual temperature is the same as the target temperature
-        var atTargetTemperature = self.ActualTemperature() >= self.DisplayingProgramStage().TargetTemperature();
-
-        if (atTargetTemperature) self.Log("At target temperature");
-
-        return atTargetTemperature;
-    });
-
-    self.AtTargetCoreTemperature = ko.computed(function () {
-        //If the actual temperature is the same as the target core temperature
-        var atTargetCoreTemperature = self.ActualCoreTemperature() >= self.DisplayingProgramStage().TargetCoreTemperature();
-
-        if (atTargetCoreTemperature) self.Log("At target core temperature");
-
-        return atTargetCoreTemperature;
-    });
-
     //Computed - End
 
     //Display Functions - Start
