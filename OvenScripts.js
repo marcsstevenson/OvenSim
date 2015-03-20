@@ -20,18 +20,18 @@ window.OvenScripts = (function () {
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.btnTemp_PlusClick(); //Next Stage
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.btnTimer_PlusClick(); //Increase the timer
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.btnTemp_PlusClick(); //Next Stage
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.btnTimer_PlusClick(); //Increase the timer
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
@@ -60,18 +60,18 @@ window.OvenScripts = (function () {
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.btnTemp_PlusClick(); //Next Stage
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.btnTimer_PlusClick(); //Increase the timer
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTemp_PlusClick();
+            ovenViewModel.btnTemp_PlusClick(); //Next Stage
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
-            ovenViewModel.btnTimer_PlusClick();
+            ovenViewModel.btnTimer_PlusClick(); //Increase the timer
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
             ovenViewModel.ProgrammingShortClick();
@@ -147,6 +147,17 @@ window.OvenScripts = (function () {
         },
         StartRunningProgram: function (ovenViewModel) {
             ovenViewModel.StartRunningProgram();
+        },
+        SelectProgram1PreHeatAndStart: function (ovenViewModel) {
+            OvenScripts.SetActualTemperatureToTarget(ovenViewModel);
+
+            ovenViewModel.ProgrammingShortClick(); //Select P01
+
+            ovenViewModel.StartRunningProgram();
+        },
+        SetTimerTo1Second: function (ovenViewModel) {
+            var duration = moment.duration(1, 'seconds');
+            ovenViewModel.DisplayingProgramStage().TimerCurrentValue(duration);
         }
     }
 }());

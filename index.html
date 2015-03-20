@@ -37,8 +37,8 @@
             
 
             OvenScripts.Setup3StageProgram_All150WithTime_BackToHome(ovenViewModel);
-            OvenScripts.Setup3StageProgram_All240WithTime_BackToHome(ovenViewModel);
-            OvenScripts.SetActualTemperatureToTarget(ovenViewModel);
+            OvenScripts.SelectProgram1PreHeatAndStart(ovenViewModel);
+            OvenScripts.SetTimerTo1Second(ovenViewModel);
 
             //Testing
 
@@ -48,7 +48,6 @@
 
             //ovenViewModel.ConnectCoreProbe();
             //ovenViewModel.IncreaseTargetCoreTemperature();
-
 
 
         });

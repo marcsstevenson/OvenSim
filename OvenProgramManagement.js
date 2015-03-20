@@ -82,12 +82,10 @@ function OvenProgramManagement(self) {
             self.SetDefaults_TempUi();
             self.SetDefaults_TimerUi();
             self.DisplayingProgramStage(self.ManualModeProgramStage());
-
+            self.IsManualMode(true);
         } else if (value === 1) {
             //Display Program
-
-            //console.log();
-
+            
             //Set the temp knob to change display program 
             self.Temp_MinusClickFunction(self.DisplayPreviousProgram);
             self.Temp_PlusClickFunction(self.DisplayNextProgram);
@@ -103,7 +101,10 @@ function OvenProgramManagement(self) {
             //Stop with the flashing
             self.ProgramButtonIsBlinking(false);
 
-            //self.ChangeDisplayProgramIndex(0);
+            //Set the display program stage to the first
+            self.ChangeDisplayProgramStageIndex(0);
+
+            self.IsManualMode(false);
         } else if (value === 2) {
             //Edit Program
 
@@ -312,6 +313,13 @@ function OvenProgramManagement(self) {
         self.ChangeDisplayProgramStage(-1);
     }
 
+    self.HasNextProgramStage = function () {
+        var lastOnProgramStage = self.EditingOvenProgram().GetLastOnProgramStage();
+        var currentProgramStageIndex = self.EditingOvenProgramStageIndex();
+
+        return currentProgramStageIndex < lastOnProgramStage.Index();
+    };
+
     self.ChangeDisplayProgramStage = function (delta) {
         var newIndex = self.EditingOvenProgramStageIndex() + delta;
 
@@ -324,7 +332,12 @@ function OvenProgramManagement(self) {
         if (newIndex > self.EditingOvenProgram().OvenProgramStages().length - 1) return; //It doesn't loop
         if (newIndex > lastOnProgramStage.Index() + 1) return; //We cannot move one past the last on stage
 
+        self.ChangeDisplayProgramStageIndex(newIndex);
+    }
+
+    self.ChangeDisplayProgramStageIndex = function (newIndex) {
         self.EditingOvenProgramStageIndex(newIndex);
+        self.SetForDisplayProgramTargetTemperature(); //The target temperature may have changed
     }
 
     self.DisplayProgramsValue = function () {
@@ -348,4 +361,41 @@ function OvenProgramManagement(self) {
     };
 
     //  Edit Programs - End
+
+    self.SetBottomDisplayForProgramDisplay = function () {
+
+        self.TimerButtonDownFunction(self.StartRunningProgram);
+        self.TimerButtonUpFunction(null);
+
+        //Lower Display will show PrH, oven is ‘Pre-Heating’.
+        //Program cannot be started until pre-heating is completed.
+        self.EnsureHeating();
+        self.IsPreheating(true);
+
+        self.BottomDisplayFunction(function () {
+            return 'PrH';
+        });
+    };
+
+    self.StartRunningProgram = function () {
+        if (self.AtTargetTemperature()) {
+            //Display timer in bottom display
+            self.BottomDisplayFunction(self.TimerDisplayValue);
+
+            //Start timer
+            self.StartTimer();
+
+            //Set the timer buttons back to normal
+            self.SetDefaults_TimerButtons();
+
+            //Restore the bottom display value
+            self.BottomDisplayFunction(self.TimerDisplayValue);
+
+            //Stop with the beeping already
+            self.StopAlarm();
+        } else {
+            //Continue heating until rdY
+            self.Log('We are not at target temperature');
+        }
+    };
 }
