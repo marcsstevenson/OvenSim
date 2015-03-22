@@ -36,14 +36,14 @@
             //OvenScripts.SetProgram1To150DegreesAnd5MinutesThenBackToHome(ovenViewModel);
             
 
-            OvenScripts.Setup3StageProgram_All150WithTime_BackToHome(ovenViewModel);
-            OvenScripts.SelectProgram1PreHeatAndStart(ovenViewModel);
-            OvenScripts.SetTimerTo1Second(ovenViewModel);
+            //OvenScripts.Setup3StageProgram_All150WithTime_BackToHome(ovenViewModel);
+            //OvenScripts.SelectProgram1PreHeatAndStart(ovenViewModel);
+            //OvenScripts.SetTimerTo1Second(ovenViewModel);
 
             //Testing
 
             //ovenViewModel.IncreaseTimer();
-            //console.clear();
+            console.clear();
             //ovenViewModel.TimerButtonDown();
 
             //ovenViewModel.ConnectCoreProbe();
@@ -65,9 +65,9 @@
 
         <div class="ButtonsLeftMargin ButtonsTopMargin">
             <!--Steam-->
-            <button class="btn" data-bind="event: { mousedown: SteamButtonDown, mouseup: SteamButtonUp }, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
+            <button class="btn" data-bind="event: { mousedown: SteamButtonDown, mouseup: SteamButtonUp, mouseout: ClearMoistureModeTimer }, css: LightOn_Steam() ? 'btnSteam_On' : 'btnSteam_Off'"></button>
             <!--Program-->
-            <button class="btn ButtonLeftMargin" data-bind="event: { mousedown: ProgramButtonDown, mouseup: ProgramButtonUp }, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
+            <button class="btn ButtonLeftMargin" data-bind="event: { mousedown: ProgramButtonDown, mouseup: ProgramButtonUp, mouseout: ClearEditProgramStartTimer }, css: LightOn_Program() ? 'btnProgram_On' : 'btnProgram_Off'"></button>
             <!--Temp-->
             <button class="btn ButtonLeftMargin" data-bind="click: TempButtonUp, css: LightOn_Temp() ? 'btnTemp_On' : 'btnTemp_Off'"></button>
         </div>

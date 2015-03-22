@@ -5,6 +5,11 @@
   font-weight: normal;
   font-style: normal;
 }
+body {
+    /*background-color: #231F20;*/
+    background-color: #000;
+    color: #aaa
+}
 .digial {
   font-family: 'ds-digitalitalic';
 }

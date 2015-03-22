@@ -51,33 +51,31 @@ function Timers(self) {
 
     //*** Steam - End
 
-    //*** Program - Start
-    //TODO
-    //*** Program - End
+    //*** Programming - Start
 
-    //*** Power - Start
+    //EditProgramStart
+    self.EditProgramStartTimerId = 11;
+    self.IsWaitingForEditProgramStartInterval = ko.observable(false);
+    self.EditProgramStartInterval = 2000; //ms
 
-    self.PowerTimerId = 2;
-    self.IsWaitingForPowerOffInterval = false;
-    self.PowerOffInterval = 1500; //ms - this is used to turn the oven off
-
-    self.ClearPowerTimer = function () {
-        if (self.PowerTimerId !== 2)
-            clearInterval(self.PowerTimerId);
+    self.ClearEditProgramStartTimer = function () {
+        if (self.EditProgramStartTimerId !== 11)
+            clearInterval(self.EditProgramStartTimerId);
     };
 
-    self.StartPowerIntervalTimer = function () {
-        self.ClearPowerTimer(); //Stop the timer
-        self.PowerTimerId = setInterval(function () { self.NextPowerInterval(); }, self.PowerOffInterval);
+    self.StartEditProgramStartIntervalTimer = function () {
+        self.ClearEditProgramStartTimer(); //Stop the timer
+        self.EditProgramStartTimerId = setInterval(function () { self.NextEditProgramStartInterval(); }, self.EditProgramStartInterval);
     };
 
-    self.NextPowerInterval = function () {
-        self.IsWaitingForPowerOffInterval = false; //Always reset this
-        self.ClearPowerTimer(); //Stop the timer
-        self.TurnOvenOff(); //Power off the oven
+    self.NextEditProgramStartInterval = function () {
+        self.IsWaitingForEditProgramStartInterval(false); //Always reset this
+        self.ClearEditProgramStartTimer(); //Stop the timer
+
+        self.ProgrammingLongClick();
     };
 
-    //*** Power - End
+    //*** Programming - End
 
     //***TempDisplay - Start
 
@@ -102,6 +100,30 @@ function Timers(self) {
     };
 
     //***TempDisplay - End
+
+    //*** Power - Start
+
+    self.PowerTimerId = 2;
+    self.IsWaitingForPowerOffInterval = false;
+    self.PowerOffInterval = 1500; //ms - this is used to turn the oven off
+
+    self.ClearPowerTimer = function () {
+        if (self.PowerTimerId !== 2)
+            clearInterval(self.PowerTimerId);
+    };
+
+    self.StartPowerIntervalTimer = function () {
+        self.ClearPowerTimer(); //Stop the timer
+        self.PowerTimerId = setInterval(function () { self.NextPowerInterval(); }, self.PowerOffInterval);
+    };
+
+    self.NextPowerInterval = function () {
+        self.IsWaitingForPowerOffInterval = false; //Always reset this
+        self.ClearPowerTimer(); //Stop the timer
+        self.TurnOvenOff(); //Power off the oven
+    };
+
+    //*** Power - End
 
     //*** Timer - Start
 
@@ -243,32 +265,6 @@ function Timers(self) {
     };
 
     //*** Core Temperature - End
-
-    //*** Programming - Start
-
-    //EditProgramStart
-    self.EditProgramStartTimerId = 11;
-    self.IsWaitingForEditProgramStartInterval = ko.observable(false);
-    self.EditProgramStartInterval = 2000; //ms
-
-    self.ClearEditProgramStartTimer = function () {
-        if (self.EditProgramStartTimerId !== 11)
-            clearInterval(self.EditProgramStartTimerId);
-    };
-
-    self.StartEditProgramStartIntervalTimer = function () {
-        self.ClearEditProgramStartTimer(); //Stop the timer
-        self.EditProgramStartTimerId = setInterval(function () { self.NextEditProgramStartInterval(); }, self.EditProgramStartInterval);
-    };
-
-    self.NextEditProgramStartInterval = function () {
-        self.IsWaitingForEditProgramStartInterval(false); //Always reset this
-        self.ClearEditProgramStartTimer(); //Stop the timer
-
-        self.ProgrammingLongClick();
-    };
-    
-    //*** Programming - End
 
     //MasterBlink - the blink to blink them all
 
